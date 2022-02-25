@@ -1,19 +1,19 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
 import {
   onAuthStateChanged,
-  setPersistence,
-  browserSessionPersistence,
+  // setPersistence,
+  // browserSessionPersistence,
 } from 'firebase/auth';
 import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import auth from 'utils/firebase';
 import MastarTemplates from 'components/Templates/MastarTemplates';
 
-import Login from 'components/Page/Login';
+import LandingPage from 'components/Page/LandingPage';
+import Login from 'components/Page/LandingPage/Login';
+import Signup from 'components/Page/LandingPage/Signup';
 import Home from 'components/Page/home';
-import Signup from 'components/Page/Signup';
 import Loading from 'components/Page/Loading';
 
 const PublicPage = () => {
@@ -50,15 +50,15 @@ const PublicPage = () => {
         <MastarTemplates>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
             <Redirect to="/" />
           </Switch>
         </MastarTemplates>
       ) : (
         <Switch>
+          <Route path="/" component={LandingPage} />
           <Route path="/login" component={Login} />
-          <Redirect to="/login" />
+          <Route path="/signup" component={Signup} />
+          <Redirect to="/" />
         </Switch>
       )}
     </div>
