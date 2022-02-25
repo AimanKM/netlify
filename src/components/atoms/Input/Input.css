@@ -1,0 +1,15 @@
+.storybook-input {
+    border-radius: 5px;
+    border: 1px solid #8b8484;
+    padding: 5px;
+}
+
+.storybook-input--small {
+  width: 25%;
+}
+.storybook-input--medium {
+  width: 50%;
+}
+.storybook-input--large {
+  width: 100%;
+}
