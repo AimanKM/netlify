@@ -50,7 +50,7 @@
     "@babel/helper-module-transforms" "^7.12.1"
     "@babel/helpers" "^7.12.1"
     "@babel/parser" "^7.12.3"
-    "@babel/netlify" "^7.10.4"
+    "@babel/template" "^7.10.4"
     "@babel/traverse" "^7.12.1"
     "@babel/types" "^7.12.1"
     convert-source-map "^1.7.0"
@@ -72,7 +72,7 @@
     "@babel/helper-module-transforms" "^7.12.1"
     "@babel/helpers" "^7.12.5"
     "@babel/parser" "^7.12.7"
-    "@babel/netlify" "^7.12.7"
+    "@babel/template" "^7.12.7"
     "@babel/traverse" "^7.12.9"
     "@babel/types" "^7.12.7"
     convert-source-map "^1.7.0"
@@ -95,7 +95,7 @@
     "@babel/helper-module-transforms" "^7.16.0"
     "@babel/helpers" "^7.16.0"
     "@babel/parser" "^7.16.0"
-    "@babel/netlify" "^7.16.0"
+    "@babel/template" "^7.16.0"
     "@babel/traverse" "^7.16.0"
     "@babel/types" "^7.16.0"
     convert-source-map "^1.7.0"
@@ -116,7 +116,7 @@
     "@babel/helper-module-transforms" "^7.16.7"
     "@babel/helpers" "^7.16.7"
     "@babel/parser" "^7.16.12"
-    "@babel/netlify" "^7.16.7"
+    "@babel/template" "^7.16.7"
     "@babel/traverse" "^7.16.10"
     "@babel/types" "^7.16.8"
     convert-source-map "^1.7.0"
@@ -304,7 +304,7 @@
   integrity sha512-BZh4mEk1xi2h4HFjWUXRQX5AEx4rvaZxHgax9gcjdLWdkjsY7MKt5p0otjsg5noXw+pB+clMCjw+aEVYADMjog==
   dependencies:
     "@babel/helper-get-function-arity" "^7.16.0"
-    "@babel/netlify" "^7.16.0"
+    "@babel/template" "^7.16.0"
     "@babel/types" "^7.16.0"
 
 "@babel/helper-function-name@^7.16.7":
@@ -313,7 +313,7 @@
   integrity sha512-QfDfEnIUyyBSR3HtrtGECuZ6DAyCkYFp7GHl75vFtTnn6pjKeK0T1DB5lLkFvBea8MdaiUABx3osbgLyInoejA==
   dependencies:
     "@babel/helper-get-function-arity" "^7.16.7"
-    "@babel/netlify" "^7.16.7"
+    "@babel/template" "^7.16.7"
     "@babel/types" "^7.16.7"
 
 "@babel/helper-get-function-arity@^7.16.0":
@@ -382,7 +382,7 @@
     "@babel/helper-simple-access" "^7.16.0"
     "@babel/helper-split-export-declaration" "^7.16.0"
     "@babel/helper-validator-identifier" "^7.15.7"
-    "@babel/netlify" "^7.16.0"
+    "@babel/template" "^7.16.0"
     "@babel/traverse" "^7.16.0"
     "@babel/types" "^7.16.0"
 
@@ -396,7 +396,7 @@
     "@babel/helper-simple-access" "^7.16.7"
     "@babel/helper-split-export-declaration" "^7.16.7"
     "@babel/helper-validator-identifier" "^7.16.7"
-    "@babel/netlify" "^7.16.7"
+    "@babel/template" "^7.16.7"
     "@babel/traverse" "^7.16.7"
     "@babel/types" "^7.16.7"
 
@@ -529,7 +529,7 @@
   integrity sha512-VVMGzYY3vkWgCJML+qVLvGIam902mJW0FvT7Avj1zEe0Gn7D93aWdLblYARTxEw+6DhZmtzhBM2zv0ekE5zg1g==
   dependencies:
     "@babel/helper-function-name" "^7.16.0"
-    "@babel/netlify" "^7.16.0"
+    "@babel/template" "^7.16.0"
     "@babel/traverse" "^7.16.0"
     "@babel/types" "^7.16.0"
 
@@ -539,7 +539,7 @@
   integrity sha512-8RpyRVIAW1RcDDGTA+GpPAwV22wXCfKOoM9bet6TLkGIFTkRQSkH1nMQ5Yet4MpoXe1ZwHPVtNasc2w0uZMqnw==
   dependencies:
     "@babel/helper-function-name" "^7.16.7"
-    "@babel/netlify" "^7.16.7"
+    "@babel/template" "^7.16.7"
     "@babel/traverse" "^7.16.8"
     "@babel/types" "^7.16.8"
 
@@ -548,7 +548,7 @@
   resolved "https://registry.npmjs.org/@babel/helpers/-/helpers-7.16.3.tgz"
   integrity sha512-Xn8IhDlBPhvYTvgewPKawhADichOsbkZuzN7qz2BusOM0brChsyXMDJvldWaYMMUNiCQdQzNEioXTp3sC8Nt8w==
   dependencies:
-    "@babel/netlify" "^7.16.0"
+    "@babel/template" "^7.16.0"
     "@babel/traverse" "^7.16.3"
     "@babel/types" "^7.16.0"
 
@@ -557,7 +557,7 @@
   resolved "https://registry.npmjs.org/@babel/helpers/-/helpers-7.16.7.tgz#7e3504d708d50344112767c3542fc5e357fffefc"
   integrity sha512-9ZDoqtfY7AuEOt3cxchfii6C7GDyyMBffktR5B2jvWv8u2+efwvpnVKXMWzNehqy68tKgAfSwfdw/lWpthS2bw==
   dependencies:
-    "@babel/netlify" "^7.16.7"
+    "@babel/template" "^7.16.7"
     "@babel/traverse" "^7.16.7"
     "@babel/types" "^7.16.7"
 
@@ -1687,16 +1687,16 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.16.7"
 
-"@babel/plugin-transform-netlify-literals@^7.12.1", "@babel/plugin-transform-netlify-literals@^7.16.0":
+"@babel/plugin-transform-template-literals@^7.12.1", "@babel/plugin-transform-template-literals@^7.16.0":
   version "7.16.0"
-  resolved "https://registry.npmjs.org/@babel/plugin-transform-netlify-literals/-/plugin-transform-netlify-literals-7.16.0.tgz"
+  resolved "https://registry.npmjs.org/@babel/plugin-transform-template-literals/-/plugin-transform-template-literals-7.16.0.tgz"
   integrity sha512-Rd4Ic89hA/f7xUSJQk5PnC+4so50vBoBfxjdQAdvngwidM8jYIBVxBZ/sARxD4e0yMXRbJVDrYf7dyRtIIKT6Q==
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
 
-"@babel/plugin-transform-netlify-literals@^7.16.7":
+"@babel/plugin-transform-template-literals@^7.16.7":
   version "7.16.7"
-  resolved "https://registry.npmjs.org/@babel/plugin-transform-netlify-literals/-/plugin-transform-netlify-literals-7.16.7.tgz#f3d1c45d28967c8e80f53666fc9c3e50618217ab"
+  resolved "https://registry.npmjs.org/@babel/plugin-transform-template-literals/-/plugin-transform-template-literals-7.16.7.tgz#f3d1c45d28967c8e80f53666fc9c3e50618217ab"
   integrity sha512-VwbkDDUeenlIjmfNeDX/V0aWrQH2QiVyJtwymVQSzItFDTpxfyJh3EVaQiS0rIN/CqbLGr0VcGmuwyTdZtdIsA==
   dependencies:
     "@babel/helper-plugin-utils" "^7.16.7"
@@ -1826,7 +1826,7 @@
     "@babel/plugin-transform-shorthand-properties" "^7.12.1"
     "@babel/plugin-transform-spread" "^7.12.1"
     "@babel/plugin-transform-sticky-regex" "^7.12.1"
-    "@babel/plugin-transform-netlify-literals" "^7.12.1"
+    "@babel/plugin-transform-template-literals" "^7.12.1"
     "@babel/plugin-transform-typeof-symbol" "^7.12.1"
     "@babel/plugin-transform-unicode-escapes" "^7.12.1"
     "@babel/plugin-transform-unicode-regex" "^7.12.1"
@@ -1903,7 +1903,7 @@
     "@babel/plugin-transform-shorthand-properties" "^7.16.0"
     "@babel/plugin-transform-spread" "^7.16.0"
     "@babel/plugin-transform-sticky-regex" "^7.16.0"
-    "@babel/plugin-transform-netlify-literals" "^7.16.0"
+    "@babel/plugin-transform-template-literals" "^7.16.0"
     "@babel/plugin-transform-typeof-symbol" "^7.16.0"
     "@babel/plugin-transform-unicode-escapes" "^7.16.0"
     "@babel/plugin-transform-unicode-regex" "^7.16.0"
@@ -1983,7 +1983,7 @@
     "@babel/plugin-transform-shorthand-properties" "^7.16.7"
     "@babel/plugin-transform-spread" "^7.16.7"
     "@babel/plugin-transform-sticky-regex" "^7.16.7"
-    "@babel/plugin-transform-netlify-literals" "^7.16.7"
+    "@babel/plugin-transform-template-literals" "^7.16.7"
     "@babel/plugin-transform-typeof-symbol" "^7.16.7"
     "@babel/plugin-transform-unicode-escapes" "^7.16.7"
     "@babel/plugin-transform-unicode-regex" "^7.16.7"
@@ -2109,18 +2109,18 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/netlify@^7.10.4", "@babel/netlify@^7.16.0", "@babel/netlify@^7.3.3":
+"@babel/template@^7.10.4", "@babel/template@^7.16.0", "@babel/template@^7.3.3":
   version "7.16.0"
-  resolved "https://registry.npmjs.org/@babel/netlify/-/netlify-7.16.0.tgz"
+  resolved "https://registry.npmjs.org/@babel/template/-/template-7.16.0.tgz"
   integrity sha512-MnZdpFD/ZdYhXwiunMqqgyZyucaYsbL0IrjoGjaVhGilz+x8YB++kRfygSOIj1yOtWKPlx7NBp+9I1RQSgsd5A==
   dependencies:
     "@babel/code-frame" "^7.16.0"
     "@babel/parser" "^7.16.0"
     "@babel/types" "^7.16.0"
 
-"@babel/netlify@^7.12.7", "@babel/netlify@^7.16.7":
+"@babel/template@^7.12.7", "@babel/template@^7.16.7":
   version "7.16.7"
-  resolved "https://registry.npmjs.org/@babel/netlify/-/netlify-7.16.7.tgz#8d126c8701fde4d66b264b3eba3d96f07666d155"
+  resolved "https://registry.npmjs.org/@babel/template/-/template-7.16.7.tgz#8d126c8701fde4d66b264b3eba3d96f07666d155"
   integrity sha512-I8j/x8kHUrbYRTUxXrrMbfCa7jxkE7tZre39x3kjr9hvI82cK1FfqLygotcWN5kdPGWcLdWMHpSBavse5tWw3w==
   dependencies:
     "@babel/code-frame" "^7.16.7"
@@ -3615,7 +3615,7 @@
     "@babel/plugin-transform-parameters" "^7.12.1"
     "@babel/plugin-transform-shorthand-properties" "^7.12.1"
     "@babel/plugin-transform-spread" "^7.12.1"
-    "@babel/plugin-transform-netlify-literals" "^7.12.1"
+    "@babel/plugin-transform-template-literals" "^7.12.1"
     "@babel/preset-env" "^7.12.11"
     "@babel/preset-react" "^7.12.10"
     "@babel/preset-typescript" "^7.12.7"
@@ -3952,7 +3952,7 @@
   integrity sha512-j565G7vZLBXK60J1hiZhbeZ6K48y8CMMZCcIihqsFv/4jj0kI3Ba4IhCrOkHiqiRM89mRu5/Ga3DnHTBvIYIEA==
   dependencies:
     "@babel/core" "^7.12.10"
-    "@babel/plugin-transform-netlify-literals" "^7.12.1"
+    "@babel/plugin-transform-template-literals" "^7.12.1"
     "@babel/preset-react" "^7.12.10"
     "@storybook/addons" "6.4.14"
     "@storybook/core-client" "6.4.14"
@@ -4371,7 +4371,7 @@
     "@babel/parser" "^7.1.0"
     "@babel/types" "^7.0.0"
     "@types/babel__generator" "*"
-    "@types/babel__netlify" "*"
+    "@types/babel__template" "*"
     "@types/babel__traverse" "*"
 
 "@types/babel__generator@*":
@@ -4381,9 +4381,9 @@
   dependencies:
     "@babel/types" "^7.0.0"
 
-"@types/babel__netlify@*":
+"@types/babel__template@*":
   version "7.4.1"
-  resolved "https://registry.npmjs.org/@types/babel__netlify/-/babel__netlify-7.4.1.tgz"
+  resolved "https://registry.npmjs.org/@types/babel__template/-/babel__template-7.4.1.tgz"
   integrity sha512-azBFKemX6kMg5Io+/rdGT0dkGreboUVR0Cdm3fz9QJWpaQGJRQXl7C+6hOTCZcMll7KFyEQpgbYI2lHdsS4U7g==
   dependencies:
     "@babel/parser" "^7.1.0"
@@ -5607,7 +5607,7 @@ babel-plugin-jest-hoist@^26.6.2:
   resolved "https://registry.npmjs.org/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-26.6.2.tgz"
   integrity sha512-PO9t0697lNTmcEHH69mdtYiOIkkOlj9fySqfO3K1eCcdISevLAE0xY59VLLUj0SoiPiTX/JU2CYFpILydUa5Lw==
   dependencies:
-    "@babel/netlify" "^7.3.3"
+    "@babel/template" "^7.3.3"
     "@babel/types" "^7.3.3"
     "@types/babel__core" "^7.0.0"
     "@types/babel__traverse" "^7.0.6"
@@ -11123,17 +11123,17 @@ lodash.merge@^4.6.2:
   resolved "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
-lodash.netlify@^4.5.0:
+lodash.template@^4.5.0:
   version "4.5.0"
-  resolved "https://registry.npmjs.org/lodash.netlify/-/lodash.netlify-4.5.0.tgz"
+  resolved "https://registry.npmjs.org/lodash.template/-/lodash.template-4.5.0.tgz"
   integrity sha512-84vYFxIkmidUiFxidA/KjjH9pAycqW+h980j7Fuz5qxRtO9pgB7MDFTdys1N7A5mcucRiDyEq4fusljItR1T/A==
   dependencies:
     lodash._reinterpolate "^3.0.0"
-    lodash.netlifysettings "^4.0.0"
+    lodash.templatesettings "^4.0.0"
 
-lodash.netlifysettings@^4.0.0:
+lodash.templatesettings@^4.0.0:
   version "4.2.0"
-  resolved "https://registry.npmjs.org/lodash.netlifysettings/-/lodash.netlifysettings-4.2.0.tgz"
+  resolved "https://registry.npmjs.org/lodash.templatesettings/-/lodash.templatesettings-4.2.0.tgz"
   integrity sha512-stgLz+i3Aa9mZgnjr/O+v9ruKZsPsndy7qPZOchbqk2cnTU1ZaldKK+v7m54WoKIyxiuMZTKT2H81F8BeAc3ZQ==
   dependencies:
     lodash._reinterpolate "^3.0.0"
@@ -16548,7 +16548,7 @@ workbox-build@^5.1.4:
     fast-json-stable-stringify "^2.1.0"
     fs-extra "^8.1.0"
     glob "^7.1.6"
-    lodash.netlify "^4.5.0"
+    lodash.template "^4.5.0"
     pretty-bytes "^5.3.0"
     rollup "^1.31.1"
     rollup-plugin-babel "^4.3.3"
