@@ -25,11 +25,16 @@ const Signup = () => {
         );
       } catch (error) {
         setLoading(false);
-        alert(error.message);
+        const { customData, message } = error;
+        if (customData._tokenResponse) {
+          alert(customData._tokenResponse.error.message);
+        } else {
+          let errorMessage = message.replace('Firebase: ', '');
+          errorMessage = errorMessage.replace('(auth/weak-password)', '');
+          alert(errorMessage);
+        }
       }
-    } else {
-      setError('Password does not match');
-    }
+    } else setError('Password does not match');
   };
 
   return (
