@@ -1,45 +1,50 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { HeaderAppBar } from 'components/molecules';
-import LoginTemplates from 'components/Templates/Login';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import auth from 'utils/firebase';
-import { Grid, Stack, Button, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { Stack, Button, Box } from '@mui/material';
+import Login from 'components/Page/LandingPage/Login';
+import Signup from 'components/Page/LandingPage/Signup';
+import styles from './style.module.css';
 
-const LandingPage = () => {
-  const history = useHistory();
-  const onSubmit = async ({ email, password }) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password).then(() =>
-        history.push('/')
-      );
-    } catch (error) {
-      console.log('error.me', error.message);
-    }
-  };
-
-  return (
-    <dev>
-      <Box
-        sx={{
-          p: '10px',
-          display: 'flex',
-          justifyContent: 'end',
-          borderBottom: '1px solid #1976d2',
-          boxShadow: '0px 0px 6px 0px #1976d2',
-        }}
-      >
-        <Stack spacing={2} direction="row">
+const LandingPage = () => (
+  <dev>
+    <Box
+      sx={{
+        p: '10px',
+        display: 'flex',
+        justifyContent: 'end',
+        borderBottom: '1px solid #1976d2',
+        boxShadow: '0px 1px 6px 0px #1976d2',
+      }}
+    >
+      <Stack spacing={2} direction="row">
+        <Link to="login">
           <Button variant="outlined">Login</Button>
+        </Link>
+        <Link to="signup">
           <Button variant="contained">Signup</Button>
-        </Stack>
-      </Box>
-      <div>
-        <h3>body</h3>
-      </div>
-    </dev>
-  );
-};
+        </Link>
+      </Stack>
+    </Box>
+    <div className={styles.container}>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Redirect to="/login" />
+      </Switch>
+    </div>
+    <Box
+      sx={{
+        p: '7px',
+        display: 'flex',
+        justifyContent: 'center',
+        borderTop: '1px solid #1976d2',
+        boxShadow: '0 -3px 6px 0 #1976d2',
+      }}
+    >
+      <h3>fotar</h3>
+    </Box>
+  </dev>
+);
 
 export default LandingPage;

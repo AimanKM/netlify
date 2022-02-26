@@ -11,8 +11,6 @@ import auth from 'utils/firebase';
 import MastarTemplates from 'components/Templates/MastarTemplates';
 
 import LandingPage from 'components/Page/LandingPage';
-import Login from 'components/Page/LandingPage/Login';
-import Signup from 'components/Page/LandingPage/Signup';
 import Home from 'components/Page/home';
 import Loading from 'components/Page/Loading';
 
@@ -54,12 +52,7 @@ const PublicPage = () => {
           </Switch>
         </MastarTemplates>
       ) : (
-        <Switch>
-          <Route path="/" component={LandingPage} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Redirect to="/" />
-        </Switch>
+        <LandingPage />
       )}
     </div>
   );
