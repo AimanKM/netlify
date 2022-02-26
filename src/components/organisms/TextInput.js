@@ -4,7 +4,15 @@ import { Field } from 'react-final-form';
 import composeValidators from 'components/validations/composeValidators';
 import TextField from '@mui/material/TextField';
 
-const TextInput = ({ finalForm, name, validate, label, onBlur, ...props }) =>
+const TextInput = ({
+  finalForm,
+  name,
+  validate,
+  label,
+  onBlur,
+  error,
+  ...props
+}) =>
   !finalForm ? (
     <TextField {...props} label={label} />
   ) : (
@@ -18,8 +26,8 @@ const TextInput = ({ finalForm, name, validate, label, onBlur, ...props }) =>
           {...input}
           {...props}
           onBlur={onBlur}
-          error={meta.touched && meta.error}
-          helperText={meta.touched && meta.error}
+          error={error || (meta.touched && meta.error)}
+          helperText={error || (meta.touched && meta.error)}
         />
       )}
     />
@@ -29,6 +37,7 @@ TextInput.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   type: PropTypes.string,
+  error: PropTypes.string,
   validate: PropTypes.array,
   onBlur: PropTypes.func,
 };

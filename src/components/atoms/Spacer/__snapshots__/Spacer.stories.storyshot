@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Auxiliary/Spacer Width 1`] = `
+<div
+  style={
+    Object {
+      "height": "100%",
+      "width": "7px",
+    }
+  }
+/>
+`;
