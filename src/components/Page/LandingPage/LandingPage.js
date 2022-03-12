@@ -7,7 +7,13 @@ import Signup from 'components/Page/LandingPage/Signup';
 import styles from './style.module.css';
 
 const LandingPage = () => (
-  <dev>
+  <Box sx={{
+    minHeight : '100vmin',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    backgroundColor: '#e2e5e7',
+    }}>
     <Box
       sx={{
         p: '10px',
@@ -15,6 +21,7 @@ const LandingPage = () => (
         justifyContent: 'end',
         borderBottom: '1px solid #1976d2',
         boxShadow: '0px 1px 6px 0px #1976d2',
+        backgroundColor: '#FFF',
       }}
     >
       <Stack spacing={2} direction="row">
@@ -40,11 +47,12 @@ const LandingPage = () => (
         justifyContent: 'center',
         borderTop: '1px solid #1976d2',
         boxShadow: '0 -3px 6px 0 #1976d2',
+        backgroundColor: '#FFF',
       }}
     >
       <h3>fotar</h3>
     </Box>
-  </dev>
+  </Box>
 );
 
 export default LandingPage;
