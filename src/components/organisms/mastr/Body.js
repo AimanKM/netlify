@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HeaderMain, DrawerHeader } from 'components/molecules';
+import { HeaderMain } from 'components/molecules';
+import { Spacer } from 'components/atoms';
 
 const Body = ({ open, children }) => {
   return (
     <HeaderMain open={open}>
-      <DrawerHeader />
+      <Spacer height={64} />
       {children}
     </HeaderMain>
   );
