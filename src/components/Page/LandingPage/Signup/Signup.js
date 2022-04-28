@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import auth from 'utils/firebase';
+import auth, { errorMessage } from 'utils/firebase';
 import { useHistory } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Form } from 'react-final-form';
@@ -25,14 +25,7 @@ const Signup = () => {
         );
       } catch (error) {
         setLoading(false);
-        const { customData, message } = error;
-        if (customData._tokenResponse) {
-          alert(customData._tokenResponse.error.message);
-        } else {
-          let errorMessage = message.replace('Firebase: ', '');
-          errorMessage = errorMessage.replace('(auth/weak-password)', '');
-          alert(errorMessage);
-        }
+        errorMessage(error.code);
       }
     } else setError('Password does not match');
   };
