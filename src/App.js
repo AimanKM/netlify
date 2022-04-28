@@ -1,15 +1,18 @@
 import React from 'react';
 import { QueryClientProvider, QueryClient } from 'react-query';
 
-import './App.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { HashRouter as Router } from 'react-router-dom';
 import RootRouter from './routes/rootRouter';
+import './App.css';
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
     <div className="App">
+      <ToastContainer theme="colored"/>
       <QueryClientProvider client={queryClient}>
         <Router>
           <RootRouter />

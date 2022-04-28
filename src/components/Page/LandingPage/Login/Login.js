@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import auth from 'utils/firebase';
+import auth, { errorMessage } from 'utils/firebase';
 import { useHistory } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Typography } from '@mui/material';
@@ -22,7 +22,7 @@ const Login = () => {
       );
     } catch (error) {
       setLoading(false);
-      alert(error.message);
+      errorMessage(error.code);
     }
   };
 
@@ -55,11 +55,7 @@ const Login = () => {
             />
 
             <Spacer height={64} />
-            <LoadingButton
-              type="submit"
-              loading={loading}
-              variant="contained"
-            >
+            <LoadingButton type="submit" loading={loading} variant="contained">
               Login
             </LoadingButton>
           </form>
