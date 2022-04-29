@@ -1,8 +1,16 @@
-.header {
-  position: fixed;
+.container {
   top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
+  gap: 32px;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
   padding: 10px;
   display: flex;
   justify-content: flex-end;
@@ -20,7 +28,7 @@
   align-items: center;
 }
 
-.container {
+.bodyContainer{
   padding: 16px;
   border: 1px solid #1976d2;
   border-radius: 6px;
@@ -29,11 +37,7 @@
 }
 
 .fotar {
-  position: fixed;
   padding: 10px;
-  bottom: 0;
-  left: 0;
-  right: 0;
   border-top: 1px solid #1976d2;
   box-shadow: 0 -3px 6px 0 #1976d2;
   background-color: #fff;

@@ -13,11 +13,13 @@ import styles from './style.module.css';
 const Signup = () => {
   const history = useHistory();
   const [loading, setLoading] = useState();
-  const [error, setError] = useState();
+  const [error, setError] = useState({});
+
+  const passwordConfirm = (password) => (value) =>
+    password && password !== value ? 'Password does not match' : undefined;
 
   const onSubmit = async ({ email, password, password_confirm }) => {
     if (password_confirm === password) {
-      setError();
       setLoading(true);
       try {
         await createUserWithEmailAndPassword(auth, email, password).then(() =>
@@ -25,9 +27,20 @@ const Signup = () => {
         );
       } catch (error) {
         setLoading(false);
+        if (error.code === 'auth/weak-password') {
+          setError({
+            password: 'password weak, Please enter another password',
+          });
+        }
+        if (error.code === 'auth/email-already-in-use') {
+          setError({ email: 'Email already in use' });
+        }
         errorMessage(error.code);
       }
-    } else setError('Password does not match');
+    } else {
+      setError({ password: 'Password does not match' });
+      errorMessage('password-does-match');
+    }
   };
 
   return (
@@ -47,6 +60,8 @@ const Signup = () => {
               name="email"
               type="email"
               validate={[required]}
+              error={!!error?.email}
+              errorMessage={error?.email}
               placeholder="E-mail"
             />
             <Spacer height={16} />
@@ -54,6 +69,9 @@ const Signup = () => {
               finalForm
               name="password"
               type="password"
+              error={!!error?.password}
+              errorMessage={error?.password}
+              onChange={() => setError()}
               validate={[required]}
               placeholder="password"
             />
@@ -62,15 +80,9 @@ const Signup = () => {
               finalForm
               name="password_confirm"
               type="password"
-              validate={[required]}
+              onCen
+              validate={[required, passwordConfirm(values.password)]}
               placeholder="Password Confirm"
-              error={
-                error ||
-                (values.password_confirm &&
-                  values.password !== values.password_confirm)
-                  ? 'Password does not match'
-                  : null
-              }
             />
             <Spacer height={64} />
 
@@ -78,7 +90,7 @@ const Signup = () => {
               type="submit"
               loading={loading}
               variant="contained"
-              disabled={pristine || values.password !== values.password_confirm}
+              disabled={pristine}
             >
               Signup
             </LoadingButton>

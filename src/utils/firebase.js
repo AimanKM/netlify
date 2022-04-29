@@ -34,6 +34,9 @@ export const errorMessage = (errorCode) => {
   if (errorCode === 'auth/email-already-in-use') {
     return toast.error('Email already in use');
   }
+  if (errorCode === 'password-does-match') {
+    return toast.error('Password does not match');
+  }
   // No internet
   if (errorCode === 'auth/network-request-failed') {
     return toast.error('No internet connection');

@@ -7,9 +7,11 @@ import TextField from '@mui/material/TextField';
 const TextInput = ({
   finalForm,
   name,
-  validate,
+  validate=[],
   label,
   onBlur,
+  onChange,
+  errorMessage,
   error,
   ...props
 }) =>
@@ -26,8 +28,14 @@ const TextInput = ({
           {...input}
           {...props}
           onBlur={onBlur}
+          onChange={({ target }) => {
+            if (onChange) {
+              onChange(target.value);
+            }
+            input.onChange(target.value);
+          }}
           error={error || (meta.touched && meta.error)}
-          helperText={error || (meta.touched && meta.error)}
+          helperText={(error && errorMessage) || (meta.touched && meta.error)}
         />
       )}
     />
@@ -37,8 +45,10 @@ TextInput.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   type: PropTypes.string,
-  error: PropTypes.string,
+  error: PropTypes.bool,
+  errorMessage: PropTypes.string,
   validate: PropTypes.array,
+  onChange: PropTypes.func,
   onBlur: PropTypes.func,
 };
 
