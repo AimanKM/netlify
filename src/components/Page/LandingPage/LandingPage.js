@@ -2,13 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { Stack, Button } from '@mui/material';
-import { Spacer } from 'components/atoms';
 import Login from 'components/Page/LandingPage/Login';
 import Signup from 'components/Page/LandingPage/Signup';
 import styles from './style.module.css';
 
 const LandingPage = () => (
-  <>
+  <div className={styles.container}>
     <div className={styles.header}>
       <Stack spacing={2} direction="row">
         <Link to="login">
@@ -20,9 +19,8 @@ const LandingPage = () => (
       </Stack>
     </div>
 
-    <Spacer height={92} />
     <div className={styles.body}>
-      <div className={styles.container}>
+      <div className={styles.bodyContainer}>
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
@@ -30,12 +28,11 @@ const LandingPage = () => (
         </Switch>
       </div>
     </div>
-    <Spacer height={64} />
 
     <div className={styles.fotar}>
       <p>Fotar</p>
     </div>
-  </>
+  </div>
 );
 
 export default LandingPage;
