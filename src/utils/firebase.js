@@ -1,20 +1,21 @@
 /* eslint-disable no-undef */
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
-  authDomain: process.env.REACT_APP_FIREBASE_APIKEY,
-  projectId: process.env.REACT_APP_FIREBASE_APIKEY,
-  storageBucket: process.env.REACT_APP_FIREBASE_APIKEY,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_APIKEY,
-  appId: process.env.REACT_APP_FIREBASE_APIKEY,
-  measurementId: process.env.REACT_APP_FIREBASE_APIKEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APPID,
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+export const db = getFirestore(app);
 
 export default auth;
 
