@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import auth, { errorMessage } from 'utils/firebase';
+import auth, { db, errorMessage } from 'utils/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 import { useHistory } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Form } from 'react-final-form';
@@ -22,8 +23,12 @@ const Signup = () => {
     if (password_confirm === password) {
       setLoading(true);
       try {
-        await createUserWithEmailAndPassword(auth, email, password).then(() =>
-          history.push('/')
+        await createUserWithEmailAndPassword(auth, email, password).then(
+          ({ user }) => {
+            setDoc(doc(db, 'users', user.uid), {
+              role: 0,
+            }).then(() => history.push('/'));
+          }
         );
       } catch (error) {
         setLoading(false);
