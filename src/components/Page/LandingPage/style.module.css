@@ -12,6 +12,7 @@
 
 .header {
   padding: 10px;
+  height: 16px;
   display: flex;
   justify-content: flex-end;
   border-bottom: 1px solid #1976d2;

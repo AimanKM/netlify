@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import auth, { errorMessage } from 'utils/firebase';
 import { useHistory } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Typography } from '@mui/material';
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { Button, Dialog, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Form } from 'react-final-form';
 import { Spacer } from 'components/atoms';
@@ -12,6 +15,7 @@ import styles from './style.module.css';
 
 const Login = () => {
   const [loading, setLoading] = useState();
+  const [open, setOpen] = useState(false);
   const history = useHistory();
 
   const onSubmit = async ({ email, password }) => {
@@ -24,6 +28,19 @@ const Login = () => {
       setLoading(false);
       errorMessage(error.code);
     }
+  };
+
+  const forgotPassword = ({ email }) => {
+    setLoading(true);
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log('error', error);
+        // ..
+      });
   };
 
   return (
@@ -39,28 +56,71 @@ const Login = () => {
             <Spacer height={16} />
 
             <TextInput
-              finalForm
+              label="E-mail"
               name="email"
               type="email"
               validate={[required]}
-              placeholder="First Name"
             />
             <Spacer height={16} />
             <TextInput
-              finalForm
+              label="password"
               name="password"
               type="password"
               validate={[required]}
-              placeholder="password"
             />
+            <Spacer height={12} />
+            <div style={{ width: '100%' }}>
+              <Button size="small" onClick={() => setOpen(true)} variant="text">
+                Forgot your password
+              </Button>
+            </div>
 
             <Spacer height={64} />
-            <LoadingButton type="submit" loading={loading} variant="contained">
+            <LoadingButton
+              type="submit"
+              loading={loading && !open}
+              variant="contained"
+            >
               Login
             </LoadingButton>
           </form>
         )}
       />
+      {/* Forgot your password */}
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <Form
+          onSubmit={forgotPassword}
+          initialValues={{}}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit} className={styles.forgotPassword}>
+              <Typography variant="h6" gutterBottom>
+                Forgot your password
+              </Typography>
+              <Spacer height={16} />
+              <TextInput
+                fullWidth
+                label="E-mail"
+                name="email"
+                type="email"
+                validate={[required]}
+              />
+              <Spacer height={32} />
+              <LoadingButton
+                type="submit"
+                loading={loading}
+                variant="contained"
+              >
+                Send
+              </LoadingButton>
+            </form>
+          )}
+        />
+      </Dialog>
     </React.Fragment>
   );
 };

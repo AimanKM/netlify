@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import auth, { db, errorMessage } from 'utils/firebase';
 import { doc, setDoc } from 'firebase/firestore';
-import { useHistory } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Form } from 'react-final-form';
 import { Typography } from '@mui/material';
@@ -12,14 +11,13 @@ import TextInput from 'components/organisms/TextInput';
 import styles from './style.module.css';
 
 const Signup = () => {
-  const history = useHistory();
   const [loading, setLoading] = useState();
   const [error, setError] = useState({});
 
-  const passwordConfirm = (password) => (value) =>
-    password && password !== value ? 'Password does not match' : undefined;
-
-  const onSubmit = async ({ email, password, password_confirm }) => {
+  const onSubmit = async (
+    { email, password, password_confirm },
+    { change }
+  ) => {
     if (password_confirm === password) {
       setLoading(true);
       try {
@@ -27,7 +25,7 @@ const Signup = () => {
           ({ user }) => {
             setDoc(doc(db, 'users', user.uid), {
               role: 0,
-            }).then(() => history.push('/'));
+            });
           }
         );
       } catch (error) {
@@ -40,9 +38,14 @@ const Signup = () => {
         if (error.code === 'auth/email-already-in-use') {
           setError({ email: 'Email already in use' });
         }
+        if (error.code === 'auth/invalid-email') {
+          setError({ email: 'Thrown if the email address is not valid' });
+        }
+        console.log('error.code', error.code);
         errorMessage(error.code);
       }
     } else {
+      change('password_confirm', '');
       setError({ password: 'Password does not match' });
       errorMessage('password-does-match');
     }
@@ -53,7 +56,7 @@ const Signup = () => {
       <Form
         onSubmit={onSubmit}
         initialValues={{}}
-        render={({ handleSubmit, pristine, values }) => (
+        render={({ handleSubmit, pristine }) => (
           <form onSubmit={handleSubmit} className={styles.container}>
             <Typography variant="h5" gutterBottom>
               Signup
@@ -61,33 +64,29 @@ const Signup = () => {
             <Spacer height={16} />
 
             <TextInput
-              finalForm
+              label="E-mail"
               name="email"
               type="email"
               validate={[required]}
               error={!!error?.email}
               errorMessage={error?.email}
-              placeholder="E-mail"
             />
             <Spacer height={16} />
             <TextInput
-              finalForm
+              label="password"
               name="password"
               type="password"
               error={!!error?.password}
               errorMessage={error?.password}
               onChange={() => setError()}
               validate={[required]}
-              placeholder="password"
             />
             <Spacer height={16} />
             <TextInput
-              finalForm
+              label="Password Confirm"
               name="password_confirm"
               type="password"
-              onCen
-              validate={[required, passwordConfirm(values.password)]}
-              placeholder="Password Confirm"
+              validate={[required]}
             />
             <Spacer height={64} />
 
