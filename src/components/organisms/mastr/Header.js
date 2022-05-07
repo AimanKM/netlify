@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useQueryClient } from 'react-query';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { signOut } from 'firebase/auth';
 import { Toolbar, Avatar, Box } from '@mui/material';
-import auth, { db } from 'utils/firebase';
+import auth from 'utils/firebase';
 import { HeaderAppBar } from 'components/molecules';
 import { motion } from 'framer-motion/dist/framer-motion';
 import { Button } from 'components/atoms';
@@ -20,26 +19,6 @@ const Header = ({ open, onClick }) => {
       qc.cancelQueries('user');
       history.push('/login');
     });
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        const docRef = doc(db, 'users', currentUser.uid);
-        getDoc(docRef).then((docSnap) => {
-          qc.setQueryData('user', {
-            email: currentUser.email,
-            photoURL: currentUser.photoURL,
-            phoneNumber: currentUser.phoneNumber,
-            displayName: currentUser.displayName,
-            ...docSnap.data(),
-          });
-        });
-      } else {
-        qc.cancelQueries('user');
-      }
-    });
-  }, [auth]);
-  // console.log('qc.getQueryData("name")', qc.getQueryData('user'));
 
   return (
     <HeaderAppBar position="fixed" open={open}>

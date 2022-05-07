@@ -17,9 +17,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 export const db = getFirestore(app);
 
-export default auth;
-
-
 export const errorMessage = (errorCode) => {
   // Login
   if (['auth/wrong-password','auth/user-not-found'].includes(errorCode)) {
@@ -31,6 +28,9 @@ export const errorMessage = (errorCode) => {
   // Signup
   if (errorCode === 'auth/weak-password') {
     return toast.error('password weak, Please enter another password');
+  }
+  if (errorCode === 'auth/invalid-email') {
+    return toast.error('Email already in use');
   }
   if (errorCode === 'auth/email-already-in-use') {
     return toast.error('Email already in use');
@@ -44,3 +44,5 @@ export const errorMessage = (errorCode) => {
   }
   return toast.error('There are some errors');
 };
+
+export default auth;
