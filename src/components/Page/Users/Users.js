@@ -1,19 +1,39 @@
 import React from 'react';
 import { db } from 'utils/firebase';
 import { collection, getDocs, query } from 'firebase/firestore';
-// import LestCard from 'components/organisms/LestCard';
+import { Card } from 'components/molecules';
+import { useQuery } from 'react-query';
 
 const Users = () => {
-  // query(collection(db, 'Article')).then((e) =>console.log('e', e));
   const citiesRef = collection(db, 'users');
-  const q = query(citiesRef);
-  getDocs(q).then(({docs}) => console.log('docs',docs));
- 
-  // const [page, setPage] = useState(1);
+  const qu = query(citiesRef);
 
-  // const { data, status } = useQuery(['characters', page], fetchData);
-  // return ( <LestCard data={data?.data?.results} />);
-  return <div>Users</div>;
+  const emulateFetch = () => {
+    return new Promise((resolve) => {
+      getDocs(qu).then((element) => resolve(element));
+    }).catch((erorr) => {
+      return new Error(erorr);
+    });
+  };
+
+  const { status, data } = useQuery(['listUsers'], emulateFetch);
+  return (
+    <>
+      {status === 'loading' && <h3>loading......</h3>}
+      {status === 'success' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          {data?.docs.map((element, key) => {
+            const docSnap = element.data();
+            return (
+              <Card key={key} name={docSnap.email}>
+                <p>{docSnap.name}</p>
+              </Card>
+            );
+          })}
+        </div>
+      )}
+    </>
+  );
 };
 
 export default Users;
