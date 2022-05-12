@@ -72,10 +72,10 @@ const Drawer = ({ onClick, open }) => {
             </Box>
           </Link>
 
-          <Link style={{ color: '#fff', textDecoration: 'none' }} to="login">
+          <Link style={{ color: '#fff', textDecoration: 'none' }} to="users">
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <SettingsIcon style={{ width: 24, height: 24 }} />
-              Settings
+              Users
             </Box>
           </Link>
 
