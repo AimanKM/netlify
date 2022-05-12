@@ -24,6 +24,8 @@ const Signup = () => {
         await createUserWithEmailAndPassword(auth, email, password).then(
           ({ user }) => {
             setDoc(doc(db, 'users', user.uid), {
+              id:user.uid,
+              email: email,
               role: 0,
             });
           }
@@ -41,7 +43,6 @@ const Signup = () => {
         if (error.code === 'auth/invalid-email') {
           setError({ email: 'Thrown if the email address is not valid' });
         }
-        console.log('error.code', error.code);
         errorMessage(error.code);
       }
     } else {
