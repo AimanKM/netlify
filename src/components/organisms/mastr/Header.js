@@ -13,6 +13,7 @@ import { ReactComponent as MenuIcon } from 'components/atoms/icon/menu.svg';
 const Header = ({ open, onClick }) => {
   const history = useHistory();
   const qc = useQueryClient();
+  const userData= qc.getQueryData('user');
 
   const logout = async () =>
     signOut(auth).then(() => {
@@ -46,7 +47,7 @@ const Header = ({ open, onClick }) => {
           }}
           animate={{ x: 0 }}
         >
-          welcome
+          welcome {userData.email}
         </motion.h3>
         <Box sx={{ mr: '24px', display: 'flex', gap: '5px' }}>
           <Avatar aria-label="recipe">A</Avatar>

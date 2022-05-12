@@ -7,7 +7,8 @@ import auth, { db } from 'utils/firebase';
 import MastarTemplates from 'components/Templates/MastarTemplates';
 
 import LandingPage from 'components/Page/LandingPage';
-import Home from 'components/Page/home';
+import Home from 'components/Page/Home';
+import Users from '../Users';
 import Loading from 'components/Page/Loading';
 import Signup from '../LandingPage/Signup';
 import { doc, getDoc } from 'firebase/firestore';
@@ -23,7 +24,7 @@ const PublicPage = () => {
         const docRef = doc(db, 'users', currentUser.uid);
         getDoc(docRef).then((docSnap) => {
           qc.setQueryData('user', {
-            email: currentUser.email,
+            // email: currentUser.email,
             photoURL: currentUser.photoURL,
             phoneNumber: currentUser.phoneNumber,
             displayName: currentUser.displayName,
@@ -50,6 +51,7 @@ const PublicPage = () => {
         <MastarTemplates>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route path="/users" component={Users} />
             <Route path="/signup" component={Signup} />
             <Redirect to="/" />
           </Switch>
