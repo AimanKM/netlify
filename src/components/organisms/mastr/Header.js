@@ -1,10 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useQueryClient } from 'react-query';
-import { signOut } from 'firebase/auth';
 import { Toolbar, Avatar, Box } from '@mui/material';
-import auth from 'utils/firebase';
+import { supabase } from 'utils/supabase';
 import { HeaderAppBar } from 'components/molecules';
 import { motion } from 'framer-motion/dist/framer-motion';
 import { Button } from 'components/atoms';
@@ -12,13 +10,10 @@ import { ReactComponent as MenuIcon } from 'components/atoms/icon/menu.svg';
 
 const Header = ({ open, onClick }) => {
   const history = useHistory();
-  const qc = useQueryClient();
+  const user = supabase.auth.user();
 
-  const logout = async () =>
-    signOut(auth).then(() => {
-      qc.cancelQueries('user');
-      history.push('/login');
-    });
+  const logout = () =>
+    supabase.auth.signIn(user.email).then(() => history.push('/login'));
 
   return (
     <HeaderAppBar position="fixed" open={open}>
@@ -50,8 +45,11 @@ const Header = ({ open, onClick }) => {
         </motion.h3>
         <Box sx={{ mr: '24px', display: 'flex', gap: '5px' }}>
           <Avatar aria-label="recipe">A</Avatar>
-          {auth.currentUser.accessToken && (
-            <Button label="Sign Out" primary onClick={logout} />
+          {user && (
+            <div style={{ display: 'flex' }}>
+              <p>{user.email}</p>
+              <Button label="Sign Out" primary onClick={logout} />
+            </div>
           )}
         </Box>
       </Box>

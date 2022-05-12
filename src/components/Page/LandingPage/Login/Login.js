@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import auth, { errorMessage } from 'utils/firebase';
 import { useHistory } from 'react-router-dom';
-import {
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
 import { Button, Dialog, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Form } from 'react-final-form';
@@ -12,35 +7,35 @@ import { Spacer } from 'components/atoms';
 import { required } from 'components/validations/FormValidations';
 import TextInput from 'components/organisms/TextInput';
 import styles from './style.module.css';
+import { supabase } from 'utils/supabase';
+import { toast } from 'react-toastify';
 
 const Login = () => {
+  const history = useHistory();
+  const { auth } = supabase;
   const [loading, setLoading] = useState();
   const [open, setOpen] = useState(false);
-  const history = useHistory();
 
-  const onSubmit = async ({ email, password }) => {
+  const onSubmit = ({ email, password }) => {
     setLoading(true);
-    try {
-      await signInWithEmailAndPassword(auth, email, password).then(() =>
-        history.push('/')
-      );
-    } catch (error) {
+    auth.signIn({ email, password }).then(({session,error}) => {
+      if (session) history.push('/');
+      if (error) toast.error(error.message);
       setLoading(false);
-      errorMessage(error.code);
-    }
+    });
   };
 
-  const forgotPassword = ({ email }) => {
+  const forgotPassword = () => {
     setLoading(true);
-    sendPasswordResetEmail(auth, email)
-      .then(() => {
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log('error', error);
-        // ..
-      });
+    // sendPasswordResetEmail(auth, email)
+    //   .then(() => {
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     setLoading(false);
+    //     console.log('error', error);
+    //     // ..
+    //   });
   };
 
   return (

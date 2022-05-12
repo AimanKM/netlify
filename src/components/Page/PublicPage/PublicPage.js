@@ -1,52 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useQueryClient } from 'react-query';
-import { onAuthStateChanged } from 'firebase/auth';
+// import { useQuery, useQueryClient } from 'react-query';
 import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
-import auth, { db } from 'utils/firebase';
+import { supabase } from 'utils/supabase';
 import MastarTemplates from 'components/Templates/MastarTemplates';
-
 import LandingPage from 'components/Page/LandingPage';
 import Home from 'components/Page/home';
-import Loading from 'components/Page/Loading';
 import Signup from '../LandingPage/Signup';
-import { doc, getDoc } from 'firebase/firestore';
 
 const PublicPage = () => {
-  const [loading, setLoading] = useState(true);
-  const qc = useQueryClient();
-  const userData= qc.getQueryData('user');
+  // const qc = useQueryClient();
+  const user = supabase.auth.user();
+  // const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        const docRef = doc(db, 'users', currentUser.uid);
-        getDoc(docRef).then((docSnap) => {
-          qc.setQueryData('user', {
-            email: currentUser.email,
-            photoURL: currentUser.photoURL,
-            phoneNumber: currentUser.phoneNumber,
-            displayName: currentUser.displayName,
-            ...docSnap.data(),
-          });
-          setLoading(false);
-          // console.log('getAuth()', getAuth);
-         
-        });
-      } else {
-        setLoading(false);
-        qc.cancelQueries('user');
-      }
-    });
-  }, [userData===undefined]);
+  // function getProfile() {
 
-  // console.log('qc.getQueryData("user")', qc.getQueryData('user'));
+  //   supabase
+  //     .from('profiles')
+  //     .select('*')
+  //     .eq('id', user.id)
+  //     .single()
+  //     .then(({ data, error, status }) => {
+  //       if (data) {
+  //           qc.setQueryData('user', {
+  //       ...user,
+  //       ...data,
+  //     });
+  //       }
+  //       if (error && status !== 406) {
+  //         throw error;
+  //       }
+  //     });
+  // }
+  
+  // console.log('data', data);
+  
 
   return (
     <div>
-      {loading ? (
-        <Loading />
-      ) : auth.currentUser ? (
+      {user ? (
         <MastarTemplates>
           <Switch>
             <Route exact path="/" component={Home} />

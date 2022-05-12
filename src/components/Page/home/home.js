@@ -11,7 +11,7 @@ const Home = () => {
   function fetchData() {
     return ApiUtils('character', { page: page });
   }
-
+  
   const { data, status } = useQuery(['characters', page], fetchData);
   return status === 'loading' ? (
     <div>

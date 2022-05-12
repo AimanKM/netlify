@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import auth, { db, errorMessage } from 'utils/firebase';
-import { doc, setDoc } from 'firebase/firestore';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Form } from 'react-final-form';
 import { Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -9,46 +6,30 @@ import { Spacer } from 'components/atoms';
 import { required } from 'components/validations/FormValidations';
 import TextInput from 'components/organisms/TextInput';
 import styles from './style.module.css';
+import { supabase } from 'utils/supabase';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
+  const { auth } = supabase;
   const [loading, setLoading] = useState();
-  const [error, setError] = useState({});
 
-  const onSubmit = async (
-    { email, password, password_confirm },
-    { change }
-  ) => {
+  const onSubmit = ({ email, password, password_confirm }) => {
     if (password_confirm === password) {
       setLoading(true);
-      try {
-        await createUserWithEmailAndPassword(auth, email, password).then(
-          ({ user }) => {
-            setDoc(doc(db, 'users', user.uid), {
-              role: 0,
-            });
-          }
-        );
-      } catch (error) {
+      auth.signUp({ email, password }).then(({ session, data, error }) => {
+        if (session) console.log('on sessinon do udates user name', data);
+        if (error) toast.error(error.message);
+
+        // const user = supabase.auth.user();
+        // const updates = {
+        //   id: user.id,
+        //   username:'AAAAAAAAAAA',
+        //   updated_at: new Date(),
+        // };
+        // supabase.from('profiles').upsert(updates).then((e) => console.log('e', e));
         setLoading(false);
-        if (error.code === 'auth/weak-password') {
-          setError({
-            password: 'password weak, Please enter another password',
-          });
-        }
-        if (error.code === 'auth/email-already-in-use') {
-          setError({ email: 'Email already in use' });
-        }
-        if (error.code === 'auth/invalid-email') {
-          setError({ email: 'Thrown if the email address is not valid' });
-        }
-        console.log('error.code', error.code);
-        errorMessage(error.code);
-      }
-    } else {
-      change('password_confirm', '');
-      setError({ password: 'Password does not match' });
-      errorMessage('password-does-match');
-    }
+      });
+    } else toast.error('Password does not match');
   };
 
   return (
@@ -68,17 +49,17 @@ const Signup = () => {
               name="email"
               type="email"
               validate={[required]}
-              error={!!error?.email}
-              errorMessage={error?.email}
+              // error={!!error?.email}
+              // errorMessage={error?.email}
             />
             <Spacer height={16} />
             <TextInput
               label="password"
               name="password"
               type="password"
-              error={!!error?.password}
-              errorMessage={error?.password}
-              onChange={() => setError()}
+              // error={!!error?.password}
+              // errorMessage={error?.password}
+              // onChange={() => setError()}
               validate={[required]}
             />
             <Spacer height={16} />
