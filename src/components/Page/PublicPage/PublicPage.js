@@ -16,30 +16,30 @@ import { doc, getDoc } from 'firebase/firestore';
 const PublicPage = () => {
   const [loading, setLoading] = useState(true);
   const qc = useQueryClient();
-  const userData= qc.getQueryData('user');
+  const userData = qc.getQueryData('user');
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         const docRef = doc(db, 'users', currentUser.uid);
         getDoc(docRef).then((docSnap) => {
+          sessionStorage.setItem('accessToken', currentUser.accessToken);
           qc.setQueryData('user', {
-            // email: currentUser.email,
+            email: currentUser.email,
             photoURL: currentUser.photoURL,
             phoneNumber: currentUser.phoneNumber,
             displayName: currentUser.displayName,
             ...docSnap.data(),
           });
           setLoading(false);
-          // console.log('getAuth()', getAuth);
-         
         });
       } else {
-        setLoading(false);
         qc.cancelQueries('user');
+        sessionStorage.removeItem('accessToken');
+        setLoading(false);
       }
     });
-  }, [userData===undefined]);
+  }, [userData === undefined]);
 
   // console.log('qc.getQueryData("user")', qc.getQueryData('user'));
 

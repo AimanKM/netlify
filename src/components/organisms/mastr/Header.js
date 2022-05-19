@@ -18,6 +18,7 @@ const Header = ({ open, onClick }) => {
   const logout = async () =>
     signOut(auth).then(() => {
       qc.cancelQueries('user');
+      sessionStorage.removeItem('accessToken');
       history.push('/login');
     });
 
