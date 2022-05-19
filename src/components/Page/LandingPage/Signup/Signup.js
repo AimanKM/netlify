@@ -24,8 +24,7 @@ const Signup = () => {
         await createUserWithEmailAndPassword(auth, email, password).then(
           ({ user }) => {
             setDoc(doc(db, 'users', user.uid), {
-              id:user.uid,
-              email: email,
+              id: user.uid,
               role: 0,
             });
           }
