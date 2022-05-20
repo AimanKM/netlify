@@ -1,5 +1,4 @@
-import { Button } from './Button/Button';
-import { Input } from './Input/Input';
+import TextInput from './TextInput';
 import Spacer from './Spacer';
 
-export { Button, Input, Spacer };
+export { TextInput, Spacer };

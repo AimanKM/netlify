@@ -5,12 +5,11 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Form } from 'react-final-form';
 import { Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Spacer } from 'components/atoms';
+import { Spacer,TextInput } from 'components/atoms';
 import { required } from 'components/validations/FormValidations';
-import TextInput from 'components/organisms/TextInput';
 import styles from './style.module.css';
 
-const Signup = () => {
+const AddUser = () => {
   const [loading, setLoading] = useState();
   const [error, setError] = useState({});
 
@@ -59,7 +58,7 @@ const Signup = () => {
         render={({ handleSubmit, pristine }) => (
           <form onSubmit={handleSubmit} className={styles.container}>
             <Typography variant="h5" gutterBottom>
-              Signup
+              Add User
             </Typography>
             <Spacer height={16} />
 
@@ -96,7 +95,7 @@ const Signup = () => {
               variant="contained"
               disabled={pristine}
             >
-              Signup
+              Add User
             </LoadingButton>
           </form>
         )}
@@ -105,4 +104,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default AddUser;
