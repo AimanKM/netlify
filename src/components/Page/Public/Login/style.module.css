@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #efefef;
+  border-radius: 6px;
+  padding: 12px;
+  height: 340px;
+  width: 245px;
+  }
+
+.forgotPassword {
+  padding: 16px;
+  min-width: 470px;
+  }
+  

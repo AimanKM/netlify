@@ -8,9 +8,8 @@ import {
 import { Button, Dialog, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Form } from 'react-final-form';
-import { Spacer } from 'components/atoms';
+import { Spacer, TextInput } from 'components/atoms';
 import { required } from 'components/validations/FormValidations';
-import TextInput from 'components/organisms/TextInput';
 import styles from './style.module.css';
 
 const Login = () => {
@@ -49,41 +48,47 @@ const Login = () => {
         onSubmit={onSubmit}
         initialValues={{}}
         render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit} className={styles.container}>
-            <Typography variant="h5" gutterBottom>
-              Login
-            </Typography>
-            <Spacer height={16} />
+          <div className={styles.container}>
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <Typography variant="h5" gutterBottom>
+                Login
+              </Typography>
+              <Spacer height={16} />
 
-            <TextInput
-              label="E-mail"
-              name="email"
-              type="email"
-              validate={[required]}
-            />
-            <Spacer height={16} />
-            <TextInput
-              label="password"
-              name="password"
-              type="password"
-              validate={[required]}
-            />
-            <Spacer height={12} />
-            <div style={{ width: '100%' }}>
-              <Button size="small" onClick={() => setOpen(true)} variant="text">
-                Forgot your password
-              </Button>
-            </div>
+              <TextInput
+                label="E-mail"
+                name="email"
+                type="email"
+                validate={[required]}
+              />
+              <Spacer height={16} />
+              <TextInput
+                label="password"
+                name="password"
+                type="password"
+                validate={[required]}
+              />
+              <Spacer height={12} />
+              <div style={{ width: '100%' }}>
+                <Button
+                  size="small"
+                  onClick={() => setOpen(true)}
+                  variant="text"
+                >
+                  Forgot your password
+                </Button>
+              </div>
 
-            <Spacer height={64} />
-            <LoadingButton
-              type="submit"
-              loading={loading && !open}
-              variant="contained"
-            >
-              Login
-            </LoadingButton>
-          </form>
+              <Spacer height={64} />
+              <LoadingButton
+                type="submit"
+                loading={loading && !open}
+                variant="contained"
+              >
+                Login
+              </LoadingButton>
+            </form>
+          </div>
         )}
       />
       {/* Forgot your password */}

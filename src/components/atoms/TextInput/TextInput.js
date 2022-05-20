@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-import composeValidators from 'components/validations/composeValidators';
 import TextField from '@mui/material/TextField';
+import { composeValidators } from 'components/validations/FormValidations';
 
 const TextInput = ({
   name,
