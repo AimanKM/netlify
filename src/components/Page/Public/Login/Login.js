@@ -63,7 +63,7 @@ const Login = () => {
               />
               <Spacer height={16} />
               <TextInput
-                label="password"
+                label="Password"
                 name="password"
                 type="password"
                 validate={[required]}

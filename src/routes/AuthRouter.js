@@ -5,7 +5,6 @@ import { Avatar, Button } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import auth from 'utils/firebase';
-import Home from 'components/Page/Auth/Home';
 import Users from 'components/Page/Auth/Users';
 import styles from './style.module.css';
 
@@ -36,17 +35,13 @@ const AuthRouter = () => {
         <div className={styles.authRouterBodyLinks}>
           <div className={styles.authRouterContainerLinks}>
             <Link className={styles.authRouterLink} to="/">
-              Home
-            </Link>
-            <Link className={styles.authRouterLink} to="/users">
-              users
+              Users
             </Link>
           </div>
         </div>
         <div className={styles.authRouterBodyContainer}>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/users" component={Users} />
+            <Route exact path="/" component={Users} />
             <Redirect to="/" />
           </Switch>
         </div>

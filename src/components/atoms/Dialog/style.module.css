@@ -1,0 +1,18 @@
+.header {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 6px 0px #3f3f3f;
+  min-width: 300px;
+}
+
+.container {
+  min-height: 150px;
+}
+
+.closeIcon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}

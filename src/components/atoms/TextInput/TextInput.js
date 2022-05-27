@@ -11,7 +11,6 @@ const TextInput = ({
   onBlur,
   onChange,
   errorMessage,
-  error,
   ...props
 }) => (
   <Field
@@ -31,8 +30,8 @@ const TextInput = ({
           }
           input.onChange(target.value);
         }}
-        error={error || (meta.touched && meta.error)}
-        helperText={(error && errorMessage) || (meta.touched && meta.error)}
+        error={errorMessage || (meta.touched && meta.error)}
+        helperText={errorMessage || (meta.touched && meta.error)}
       />
     )}
   />
@@ -41,7 +40,6 @@ TextInput.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   type: PropTypes.string,
-  error: PropTypes.bool,
   errorMessage: PropTypes.string,
   validate: PropTypes.array,
   onChange: PropTypes.func,
