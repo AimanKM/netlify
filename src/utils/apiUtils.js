@@ -1,22 +1,6 @@
 import axios from 'axios';
 
-function ApiUtils(url, params, method = 'GET', data = null) {
-  const headers = {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  };
-
-  return axios({
-    baseURL: 'https://rickandmortyapi.com/api/',
-    method,
-    url,
-    params,
-    data,
-    headers,
-  });
-}
-
-function ApiUtilsExpress({
+function ApiUtils({
   url = '',
   params = {},
   method = 'GET',
@@ -38,4 +22,4 @@ function ApiUtilsExpress({
   });
 }
 
-export { ApiUtils, ApiUtilsExpress };
+export { ApiUtils };

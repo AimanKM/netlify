@@ -10,6 +10,9 @@ body,
   height: 100%;
 }
 
+a {
+  text-decoration: none;
+}
 /* *::-webkit-scrollbar {
   width: 8px;
 }
@@ -25,6 +28,4 @@ body,
   border-radius: 8px;
 } */
 
-a {
-  text-decoration: none;
-}
+

@@ -1,5 +1,5 @@
-import { ApiUtilsExpress } from 'utils/apiUtils';
+import { ApiUtils } from 'utils/apiUtils';
 
 export const gitUsers = () => {
-  return ApiUtilsExpress({ url: 'users' });
+  return ApiUtils({ url: 'users' });
 };
