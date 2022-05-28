@@ -4,6 +4,7 @@ import { LoadingButton } from '@mui/lab';
 import { Form } from 'react-final-form';
 import { Spacer, TextInput, Flex } from 'components/atoms';
 import { required } from 'components/validations/FormValidations';
+import AvatarEditProfile from './AvatarEditProfile';
 import styles from './style.module.css';
 
 const FormAddUser = ({ onSubmit }) => {
@@ -20,6 +21,9 @@ const FormAddUser = ({ onSubmit }) => {
       initialValues={{}}
       render={({ handleSubmit, pristine, values }) => (
         <form onSubmit={handleSubmit} className={styles.formAddUser}>
+          <div>
+            <AvatarEditProfile />
+          </div>
           <Flex gap={8}>
             <TextInput
               label="Display Name"
