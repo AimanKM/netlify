@@ -13,7 +13,8 @@ function ApiUtils({
   };
 
   return axios({
-    baseURL: 'http://localhost:5000/api/',
+    // eslint-disable-next-line no-undef
+    baseURL: process.env.REACT_APP_BASE_URL,
     method,
     url,
     params,
