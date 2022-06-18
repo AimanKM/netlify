@@ -9,7 +9,7 @@ const AvatarEditProfile = () => {
   const [image, setImage] = useState();
   const [open, setOpen] = useState();
   const [cropper, setCropper] = useState();
-  const [cropData, setCropData] = useState('#');
+  // const [cropData, setCropData] = useState('#');
 
   const onChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -22,11 +22,11 @@ const AvatarEditProfile = () => {
     }
   };
 
-  const getCropData = () => {
-    if (typeof cropper !== 'undefined') {
-      setCropData(cropper.getCroppedCanvas().toDataURL());
-    }
-  };
+  // const getCropData = () => {
+  //   if (typeof cropper !== 'undefined') {
+  //     setCropData(cropper.getCroppedCanvas().toDataURL());
+  //   }
+  // };
 
   return (
     <div className="App">
