@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
+import { setPersistence, browserSessionPersistence } from 'firebase/auth';
 import auth, { db } from 'utils/firebase';
 import Loading from 'components/Page/Public/Loading';
 import AuthRouter from './AuthRouter';
@@ -14,24 +15,31 @@ const RootRouter = () => {
   // const userData = qc.getQueryData('user');
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        const docRef = doc(db, 'users', currentUser.uid);
-        getDoc(docRef).then((docSnap) => {
-          qc.setQueryData('user', {
-            email: currentUser.email,
-            photoURL: currentUser.photoURL,
-            phoneNumber: currentUser.phoneNumber,
-            displayName: currentUser.displayName,
-            ...docSnap.data(),
-          });
-          setLoading(false);
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        return onAuthStateChanged(auth, (currentUser) => {
+          if (currentUser) {
+            const docRef = doc(db, 'users', currentUser.uid);
+            getDoc(docRef).then((docSnap) => {
+              qc.setQueryData('user', {
+                email: currentUser.email,
+                photoURL: currentUser.photoURL,
+                phoneNumber: currentUser.phoneNumber,
+                displayName: currentUser.displayName,
+                ...docSnap.data(),
+              });
+              setLoading(false);
+            });
+          } else {
+            qc.cancelQueries('user');
+            setLoading(false);
+          }
         });
-      } else {
-        qc.cancelQueries('user');
-        setLoading(false);
-      }
-    });
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        console.log('error', error);
+      });
   }, [auth]);
 
   return (
