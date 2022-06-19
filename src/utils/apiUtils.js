@@ -1,4 +1,5 @@
 import axios from 'axios';
+import auth from './firebase';
 
 function ApiUtils({
   url = '',
@@ -9,7 +10,7 @@ function ApiUtils({
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    'Access-Token': sessionStorage.getItem('accessToken'),
+    'Access-Token': auth.currentUser.accessToken,
   };
 
   return axios({
