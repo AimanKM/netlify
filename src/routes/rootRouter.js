@@ -11,14 +11,13 @@ import PublicRouter from './PublicRouter';
 const RootRouter = () => {
   const [loading, setLoading] = useState(true);
   const qc = useQueryClient();
-  const userData = qc.getQueryData('user');
+  // const userData = qc.getQueryData('user');
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         const docRef = doc(db, 'users', currentUser.uid);
         getDoc(docRef).then((docSnap) => {
-          sessionStorage.setItem('accessToken', currentUser.accessToken);
           qc.setQueryData('user', {
             email: currentUser.email,
             photoURL: currentUser.photoURL,
@@ -30,13 +29,11 @@ const RootRouter = () => {
         });
       } else {
         qc.cancelQueries('user');
-        sessionStorage.removeItem('accessToken');
         setLoading(false);
       }
     });
-  }, [userData === undefined]);
+  }, [auth]);
 
-  // console.log('qc.getQueryData("user")', qc.getQueryData('user'));
   return (
     <>
       {loading && <Loading />}
