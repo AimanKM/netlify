@@ -18,7 +18,7 @@ const RootRouter = () => {
     setPersistence(auth, browserSessionPersistence)
       .then(() => {
         return onAuthStateChanged(auth, (currentUser) => {
-          if (currentUser.uid) {
+          if (currentUser) {
             const docRef = doc(db, 'users', currentUser.uid);
             try {
               getDoc(docRef).then((docSnap) => {
