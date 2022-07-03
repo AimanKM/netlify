@@ -36,11 +36,15 @@ const AuthRouter = () => {
             <Link className={styles.authRouterLink} to="/">
               Users
             </Link>
+            <Link className={styles.authRouterLink} to="/aaa">
+              aaa
+            </Link>
           </div>
         </div>
         <div className={styles.authRouterBodyContainer}>
           <Switch>
             <Route exact path="/" component={Users} />
+            <Route exact path="/aaa" component={() => <h1>AAA</h1>} />
             <Redirect to="/" />
           </Switch>
         </div>

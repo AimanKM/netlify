@@ -18,18 +18,23 @@ const RootRouter = () => {
     setPersistence(auth, browserSessionPersistence)
       .then(() => {
         return onAuthStateChanged(auth, (currentUser) => {
-          if (currentUser) {
+          if (currentUser.uid) {
             const docRef = doc(db, 'users', currentUser.uid);
-            getDoc(docRef).then((docSnap) => {
-              qc.setQueryData('user', {
-                email: currentUser.email,
-                photoURL: currentUser.photoURL,
-                phoneNumber: currentUser.phoneNumber,
-                displayName: currentUser.displayName,
-                ...docSnap.data(),
+            try {
+              getDoc(docRef).then((docSnap) => {
+                sessionStorage.setItem('accessToken', currentUser.accessToken);
+                qc.setQueryData('user', {
+                  email: currentUser.email,
+                  photoURL: currentUser.photoURL,
+                  phoneNumber: currentUser.phoneNumber,
+                  displayName: currentUser.displayName,
+                  ...docSnap.data(),
+                });
+                setLoading(false);
               });
-              setLoading(false);
-            });
+            } catch (e) {
+              console.log('Error console: ', e);
+            }
           } else {
             qc.cancelQueries('user');
             setLoading(false);
