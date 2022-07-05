@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { LoadingButton } from '@mui/lab';
 import { Form } from 'react-final-form';
+// import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
+// import { storage } from 'utils/firebase';
 import { Spacer, TextInput, Flex } from 'components/atoms';
 import { required } from 'components/validations/FormValidations';
 import AvatarEditProfile from './AvatarEditProfile';
@@ -22,7 +24,21 @@ const FormAddUser = ({ onSubmit }) => {
       render={({ handleSubmit, pristine, values }) => (
         <form onSubmit={handleSubmit} className={styles.formAddUser}>
           <div>
-            <AvatarEditProfile />
+            <AvatarEditProfile
+              onUpload={(formData) => {
+                const file = formData.get('file');
+                console.log('file', file);
+                // const values = [...formData.entries()];
+                // console.log(values);
+                // const storageRef = ref(storage, `files/${file.name}`);
+                // uploadBytesResumable(storageRef, file).then((snapshot) => {
+                //   console.log('snapshot', snapshot);
+                //   getDownloadURL(snapshot.ref).then((url) => {
+                //     console.log('File available at', url);
+                //   });
+                // });
+              }}
+            />
           </div>
           <Flex gap={8}>
             <TextInput
