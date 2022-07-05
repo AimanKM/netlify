@@ -12,6 +12,7 @@ const Users = () => {
   const { status, data } = useQuery('listUsers', gitUsers, {
     onError: () => toast.error('Internal Server Error'),
   });
+
   return (
     <>
       {status === 'error' && (

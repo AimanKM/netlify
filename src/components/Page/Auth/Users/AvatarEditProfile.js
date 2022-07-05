@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { Cropper } from 'react-advanced-cropper';
 import { Avatar, Button } from '@mui/material';
 import { Dialog } from 'components/atoms';
 import 'react-advanced-cropper/dist/style.css';
 import 'react-advanced-cropper/dist/themes/compact.css';
 
-const AvatarEditProfile = () => {
+const AvatarEditProfile = ({ onUpload }) => {
   const inputRef = useRef();
   const [image, setImage] = useState();
   const [open, setOpen] = useState();
@@ -27,26 +28,36 @@ const AvatarEditProfile = () => {
 
   const getCropData = () => {
     if (typeof cropper !== 'undefined') {
+      const formData = new FormData();
+      const canvas = cropper?.getCanvas();
       setCropData(cropper.getCanvas().toDataURL());
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const { name, type } = inputRef.current.files[0];
+          const file = new File([blob], name, { type });
+          formData.append('file', file);
+          onUpload(formData);
+        }
+      });
     }
     setOpen(false);
   };
 
-//   const onUpload = () => {
-//     const canvas = cropperRef.current?.getCanvas();
-//     if (canvas) {
-//         const form = new FormData();
-//         canvas.toBlob((blob) => {
-//             if (blob) {
-//                 form.append('file', blob);
-//                 fetch('http://example.com/upload/', {
-//                     method: 'POST',
-//                     body: form,
-//                 });
-//             }
-//         }, 'image/jpeg');
-//     }
-// };
+  //   const onUpload = () => {
+  //     const canvas = cropperRef.current?.getCanvas();
+  //     if (canvas) {
+  //         const form = new FormData();
+  //         canvas.toBlob((blob) => {
+  //             if (blob) {
+  //                 form.append('file', blob);
+  //                 fetch('http://example.com/upload/', {
+  //                     method: 'POST',
+  //                     body: form,
+  //                 });
+  //             }
+  //         }, 'image/jpeg');
+  //     }
+  // };
 
   return (
     <div className="App">
@@ -85,4 +96,9 @@ const AvatarEditProfile = () => {
     </div>
   );
 };
+
+AvatarEditProfile.propTypes = {
+  onUpload: PropTypes.func,
+};
+
 export default AvatarEditProfile;
