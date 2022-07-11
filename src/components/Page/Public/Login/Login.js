@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import auth, { errorMessage } from 'utils/firebase';
 import { useHistory } from 'react-router-dom';
-import {
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import { login } from 'actions/auth';
 import { Button, Dialog, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Form } from 'react-final-form';
@@ -20,27 +16,28 @@ const Login = () => {
   const onSubmit = async ({ email, password }) => {
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password).then(() =>
-        history.push('/')
-      );
+      await login({ email, password }).then(({ data }) => {
+        localStorage.setItem('accessToken', data.accessToken);
+        history.push('/');
+      });
     } catch (error) {
       setLoading(false);
-      errorMessage(error.code);
+      console.log('error', error);
     }
   };
 
-  const forgotPassword = ({ email }) => {
-    setLoading(true);
-    sendPasswordResetEmail(auth, email)
-      .then(() => {
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log('error', error);
-        // ..
-      });
-  };
+  // const forgotPassword = ({ email }) => {
+  //   setLoading(true);
+  //   sendPasswordResetEmail(auth, email)
+  //     .then(() => {
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       setLoading(false);
+  //       console.log('error', error);
+  //       // ..
+  //     });
+  // };
 
   return (
     <React.Fragment>
@@ -99,7 +96,8 @@ const Login = () => {
         aria-describedby="alert-dialog-description"
       >
         <Form
-          onSubmit={forgotPassword}
+          // onSubmit={forgotPassword}
+          onSubmit={() => {}}
           initialValues={{}}
           render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit} className={styles.forgotPassword}>
