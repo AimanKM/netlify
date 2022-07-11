@@ -6,12 +6,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import { HashRouter as Router } from 'react-router-dom';
 import RootRouter from './routes/rootRouter';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function App() {
   return (
     <div className="App">
-      <ToastContainer theme="colored"/>
+      <ToastContainer theme="colored" />
       <QueryClientProvider client={queryClient}>
         <Router>
           <RootRouter />
