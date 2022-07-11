@@ -1,16 +1,15 @@
 import axios from 'axios';
-import auth from './firebase';
 
 function ApiUtils({
   url = '',
   params = {},
   method = 'GET',
-  data = null,
+  data,
 }) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    'Access-Token': auth.currentUser.accessToken,
+    'Access-Token': localStorage.getItem('accessToken'),
   };
 
   return axios({
