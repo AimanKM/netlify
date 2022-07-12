@@ -1,16 +1,27 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Button } from '@mui/material';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { gitUsers } from 'actions/users';
+import { gitUsers, addUsers } from 'actions/users';
 import { Spacer, Card, Dialog } from 'components/atoms';
 import FormAddUser from './FormAddUser';
 import styles from './style.module.css';
 
 const Users = () => {
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
-  const { status, data } = useQuery('listUsers', gitUsers, {
+
+  const { isFetching, status, data } = useQuery('listUsers', gitUsers, {
     onError: () => toast.error('Internal Server Error'),
+  });
+
+  const onSubmit = useMutation(addUsers, {
+    onSuccess: (res) => {
+      queryClient.invalidateQueries('listUsers', { exact: true });
+      toast.success(res.data.message);
+      setOpen(false);
+    },
+    onError: (error) => toast.error(error.response.data.message),
   });
 
   return (
@@ -18,10 +29,10 @@ const Users = () => {
       {status === 'error' && (
         <Typography variant="h6">Internal Server Error</Typography>
       )}
-      {status === 'loading' && (
+      {(status === 'loading' || isFetching) && (
         <Typography variant="h6">loading......</Typography>
       )}
-      {status === 'success' && (
+      {status === 'success' && !isFetching && (
         <div className={styles.container}>
           <Spacer height={12} />
           <Button size="small" onClick={() => setOpen(true)} variant="text">
@@ -43,7 +54,10 @@ const Users = () => {
           </div>
 
           <Dialog open={open} onClose={() => setOpen(false)} title="Add User">
-            <FormAddUser onSubmit={(first) => console.log('first', first)} />
+            <FormAddUser
+              fetching={onSubmit.isLoading}
+              onSubmit={(values) => onSubmit.mutate(values)}
+            />
           </Dialog>
         </div>
       )}
