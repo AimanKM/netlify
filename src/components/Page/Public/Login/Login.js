@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { login } from 'actions/auth';
+import { useMutation } from 'react-query';
 import { Button, Dialog, Typography } from '@mui/material';
+import { login } from 'actions/auth';
+import { toast } from 'react-toastify';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Form } from 'react-final-form';
 import { Spacer, TextInput } from 'components/atoms';
@@ -9,41 +11,22 @@ import { required } from 'components/validations/FormValidations';
 import styles from './style.module.css';
 
 const Login = () => {
-  const [loading, setLoading] = useState();
-  const [open, setOpen] = useState(false);
   const history = useHistory();
+  const [open, setOpen] = useState(false);
 
-  const onSubmit = async ({ email, password }) => {
-    setLoading(true);
-    try {
-      await login({ email, password }).then(({ data }) => {
-        localStorage.setItem('accessToken', data.accessToken);
-        history.push('/');
-      });
-    } catch (error) {
-      setLoading(false);
-      console.log('error', error);
-    }
-  };
-
-  // const forgotPassword = ({ email }) => {
-  //   setLoading(true);
-  //   sendPasswordResetEmail(auth, email)
-  //     .then(() => {
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       setLoading(false);
-  //       console.log('error', error);
-  //       // ..
-  //     });
-  // };
+  const onSubmit = useMutation(login, {
+    onSuccess: (res) => {
+      localStorage.setItem('accessToken', res.data.accessToken);
+      history.push('/');
+    },
+    onError: (error) => toast.error(error.response.data.message),
+  });
 
   return (
     <React.Fragment>
       <Form
-        onSubmit={onSubmit}
         initialValues={{}}
+        onSubmit={(values) => onSubmit.mutate(values)}
         render={({ handleSubmit }) => (
           <div className={styles.container}>
             <form onSubmit={handleSubmit} className={styles.form}>
@@ -79,7 +62,7 @@ const Login = () => {
               <Spacer height={64} />
               <LoadingButton
                 type="submit"
-                loading={loading && !open}
+                loading={onSubmit.isLoading}
                 variant="contained"
               >
                 Login
@@ -115,7 +98,7 @@ const Login = () => {
               <Spacer height={32} />
               <LoadingButton
                 type="submit"
-                loading={loading}
+                // loading={loading}
                 variant="contained"
               >
                 Send

@@ -5,11 +5,11 @@ import { Form } from 'react-final-form';
 // import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 // import { storage } from 'utils/firebase';
 import { Spacer, TextInput, Flex } from 'components/atoms';
-import { required } from 'components/validations/FormValidations';
+import { required, email } from 'components/validations/FormValidations';
 import AvatarEditProfile from './AvatarEditProfile';
 import styles from './style.module.css';
 
-const FormAddUser = ({ onSubmit }) => {
+const FormAddUser = ({ fetching = false, onSubmit }) => {
   const checkPasswordConfirm = ({ password, password_confirm }) => {
     if (password && password_confirm && password !== password_confirm) {
       return 'Password does not match';
@@ -50,7 +50,7 @@ const FormAddUser = ({ onSubmit }) => {
               label="E-mail"
               name="email"
               type="email"
-              validate={[required]}
+              validate={[required, email]}
             />
           </Flex>
           <Spacer height={16} />
@@ -74,8 +74,8 @@ const FormAddUser = ({ onSubmit }) => {
 
           <LoadingButton
             type="submit"
-            // loading={loading}
-            disabled={pristine || !!checkPasswordConfirm(values)}
+            loading={fetching}
+            disabled={pristine || fetching || !!checkPasswordConfirm(values)}
             variant="contained"
           >
             Send
@@ -87,6 +87,7 @@ const FormAddUser = ({ onSubmit }) => {
 };
 
 FormAddUser.propTypes = {
+  fetching: PropTypes.bool,
   onSubmit: PropTypes.func,
 };
 
