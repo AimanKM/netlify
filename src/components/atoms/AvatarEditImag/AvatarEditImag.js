@@ -14,7 +14,7 @@ const AvatarEditProfile = ({ onUpload }) => {
   const [cropData, setCropData] = useState('#');
 
   const onChangeInput = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
+    if (e.target.files.length > 0) {
       const reader = new FileReader();
       reader.onload = () => {
         setImage(reader.result);
@@ -42,22 +42,6 @@ const AvatarEditProfile = ({ onUpload }) => {
     }
     setOpen(false);
   };
-
-  //   const onUpload = () => {
-  //     const canvas = cropperRef.current?.getCanvas();
-  //     if (canvas) {
-  //         const form = new FormData();
-  //         canvas.toBlob((blob) => {
-  //             if (blob) {
-  //                 form.append('file', blob);
-  //                 fetch('http://example.com/upload/', {
-  //                     method: 'POST',
-  //                     body: form,
-  //                 });
-  //             }
-  //         }, 'image/jpeg');
-  //     }
-  // };
 
   return (
     <div className="App">
