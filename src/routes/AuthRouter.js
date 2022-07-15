@@ -30,41 +30,43 @@ const AuthRouter = () => {
   return (
     <>
       {status === 'loading' && <Loading />}
-      <div className={styles.authRouter}>
-        <div className={styles.authRouterHeader}>
-          <p>{userData?.email}</p>
-          <div style={{ display: 'flex', gap: 6 }}>
-            <Button
-              size="small"
-              variant="text"
-              disabled={onClicklogout.isLoading}
-              onClick={() => onClicklogout.mutate()}
-            >
-              Logout
-            </Button>
-            <Avatar aria-label="recipe">A</Avatar>
-          </div>
-        </div>
-        <div className={styles.authRouterBody}>
-          <div className={styles.authRouterBodyLinks}>
-            <div className={styles.authRouterContainerLinks}>
-              <Link className={styles.authRouterLink} to="/">
-                Users
-              </Link>
-              <Link className={styles.authRouterLink} to="/aaa">
-                aaa
-              </Link>
+      {status === 'success' && (
+        <div className={styles.authRouter}>
+          <div className={styles.authRouterHeader}>
+            <p>{userData?.email}</p>
+            <div style={{ display: 'flex', gap: 6 }}>
+              <Button
+                size="small"
+                variant="text"
+                disabled={onClicklogout.isLoading}
+                onClick={() => onClicklogout.mutate()}
+              >
+                Logout
+              </Button>
+              <Avatar aria-label="recipe">A</Avatar>
             </div>
           </div>
-          <div className={styles.authRouterBodyContainer}>
-            <Switch>
-              <Route exact path="/" component={Users} />
-              <Route exact path="/aaa" component={() => <h1>AAA</h1>} />
-              <Redirect to="/" />
-            </Switch>
+          <div className={styles.authRouterBody}>
+            <div className={styles.authRouterBodyLinks}>
+              <div className={styles.authRouterContainerLinks}>
+                <Link className={styles.authRouterLink} to="/">
+                  Users
+                </Link>
+                <Link className={styles.authRouterLink} to="/aaa">
+                  aaa
+                </Link>
+              </div>
+            </div>
+            <div className={styles.authRouterBodyContainer}>
+              <Switch>
+                <Route exact path="/" component={Users} />
+                <Route exact path="/aaa" component={() => <h1>AAA</h1>} />
+                <Redirect to="/" />
+              </Switch>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

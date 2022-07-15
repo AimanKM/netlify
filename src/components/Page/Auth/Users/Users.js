@@ -1,25 +1,57 @@
 import React, { useState } from 'react';
-import { Grid, Typography, Button } from '@mui/material';
+import { Grid, Typography, Button, IconButton } from '@mui/material';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { gitUsers, addUsers } from 'actions/users';
-import { Spacer, Card, Dialog } from 'components/atoms';
+import {
+  gitUsers,
+  addUsers,
+  uploadUserProfile,
+  deleteUser,
+} from 'actions/users';
+import { Spacer, Card, Dialog, AvatarEditImag } from 'components/atoms';
+import { ReactComponent as DeleteIcon } from 'components/atoms/icon/Delete.svg';
 import FormAddUser from './FormAddUser';
 import styles from './style.module.css';
 
 const Users = () => {
   const queryClient = useQueryClient();
-  const [open, setOpen] = useState(false);
+  const [steps, setSteps] = useState(0);
+  const [userId, setUserId] = useState(null);
 
-  const { isFetching, status, data } = useQuery('listUsers', gitUsers, {
+  const { isLoading, status, data } = useQuery('listUsers', gitUsers, {
     onError: () => toast.error('Internal Server Error'),
   });
 
+  const onCloseDialog = () => {
+    if (userId) {
+      queryClient.invalidateQueries('listUsers', { exact: true });
+      setUserId(null);
+      return setSteps(0);
+    }
+    return setSteps(0);
+  };
+
   const onSubmit = useMutation(addUsers, {
+    onSuccess: (res) => {
+      setUserId(res.data?.userId);
+      toast.success(res.data.message);
+      setSteps(2);
+    },
+    onError: (error) => toast.error(error.response.data.message),
+  });
+
+  const uploadProfile = useMutation(uploadUserProfile, {
+    onSuccess: (res) => {
+      toast.success(res.data.message);
+      onCloseDialog();
+    },
+    onError: (error) => toast.error(error.response.data.message),
+  });
+
+  const onClickDeleteUser = useMutation(deleteUser, {
     onSuccess: (res) => {
       queryClient.invalidateQueries('listUsers', { exact: true });
       toast.success(res.data.message);
-      setOpen(false);
     },
     onError: (error) => toast.error(error.response.data.message),
   });
@@ -29,13 +61,13 @@ const Users = () => {
       {status === 'error' && (
         <Typography variant="h6">Internal Server Error</Typography>
       )}
-      {(status === 'loading' || isFetching) && (
+      {(status === 'loading' || isLoading) && (
         <Typography variant="h6">loading......</Typography>
       )}
-      {status === 'success' && !isFetching && (
+      {status === 'success' && !isLoading && (
         <div className={styles.container}>
           <Spacer height={12} />
-          <Button size="small" onClick={() => setOpen(true)} variant="text">
+          <Button size="small" onClick={() => setSteps(1)} variant="text">
             Add User
           </Button>
           <Spacer height={12} />
@@ -45,7 +77,25 @@ const Users = () => {
             <Grid container spacing={1}>
               {data?.data.users.map((element, key) => (
                 <Grid item xs={12} sm={6} md={4} xl={2} key={key}>
-                  <Card key={key} name={element?.email}>
+                  <Card
+                    key={key}
+                    src={element?.photoURL}
+                    name={element?.display_name}
+                    action={
+                      <IconButton
+                        color="error"
+                        aria-label="delete"
+                        disabled={onClickDeleteUser.isLoading}
+                        onClick={() =>
+                          onClickDeleteUser.mutate({
+                            userId: element.userId,
+                          })
+                        }
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    }
+                  >
                     <p>{element?.email}</p>
                   </Card>
                 </Grid>
@@ -53,11 +103,22 @@ const Users = () => {
             </Grid>
           </div>
 
-          <Dialog open={open} onClose={() => setOpen(false)} title="Add User">
-            <FormAddUser
-              fetching={onSubmit.isLoading}
-              onSubmit={(values) => onSubmit.mutate(values)}
-            />
+          <Dialog open={!!steps} onClose={onCloseDialog} title="Add User">
+            <>
+              {steps === 2 && userId ? (
+                <AvatarEditImag
+                  onUpload={(formData) => {
+                    formData.append('userId', userId);
+                    uploadProfile.mutate(formData);
+                  }}
+                />
+              ) : (
+                <FormAddUser
+                  fetching={onSubmit.isLoading}
+                  onSubmit={(values) => onSubmit.mutate(values)}
+                />
+              )}
+            </>
           </Dialog>
         </div>
       )}
