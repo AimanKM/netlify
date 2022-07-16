@@ -4,7 +4,7 @@ import { LoadingButton } from '@mui/lab';
 import { Form } from 'react-final-form';
 import { Spacer, TextInput, Flex } from 'components/atoms';
 import { required, email } from 'components/validations/FormValidations';
-import styles from './style.module.css';
+import styles from '../style.module.css';
 
 const FormAddUser = ({ fetching = false, onSubmit }) => {
   const checkPasswordConfirm = ({ password, password_confirm }) => {

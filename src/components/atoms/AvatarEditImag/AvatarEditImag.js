@@ -6,7 +6,7 @@ import { Dialog } from 'components/atoms';
 import 'react-advanced-cropper/dist/style.css';
 import 'react-advanced-cropper/dist/themes/compact.css';
 
-const AvatarEditProfile = ({ onUpload }) => {
+const AvatarEditProfile = ({ insideAvatar, avatarWidthHeight, onUpload }) => {
   const inputRef = useRef();
   const [image, setImage] = useState();
   const [open, setOpen] = useState();
@@ -44,7 +44,7 @@ const AvatarEditProfile = ({ onUpload }) => {
   };
 
   return (
-    <div className="App">
+    <div>
       <input
         type="file"
         ref={inputRef}
@@ -54,11 +54,17 @@ const AvatarEditProfile = ({ onUpload }) => {
       />
       <div className="Crop-Controls">
         <Avatar
-          style={{ cursor: 'pointer' }}
           src={cropData}
           aria-label="recipe"
           onClick={() => inputRef.current?.click()}
-        ></Avatar>
+          style={{
+            cursor: 'pointer',
+            width: avatarWidthHeight,
+            height: avatarWidthHeight,
+          }}
+        >
+          {insideAvatar}
+        </Avatar>
       </div>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <div>
@@ -82,6 +88,8 @@ const AvatarEditProfile = ({ onUpload }) => {
 };
 
 AvatarEditProfile.propTypes = {
+  insideAvatar: PropTypes.node,
+  avatarWidthHeight: PropTypes.number,
   onUpload: PropTypes.func,
 };
 
