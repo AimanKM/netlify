@@ -8,9 +8,10 @@ import {
   uploadUserProfile,
   deleteUser,
 } from 'actions/users';
-import { Spacer, Card, Dialog, AvatarEditImag } from 'components/atoms';
+import { Spacer, Card, Dialog } from 'components/atoms';
 import { ReactComponent as DeleteIcon } from 'components/atoms/icon/Delete.svg';
-import FormAddUser from './FormAddUser';
+import FormAddUser from './components/FormAddUser';
+import EditImagSteps2 from './components/EditImagSteps2';
 import styles from './style.module.css';
 
 const Users = () => {
@@ -106,7 +107,8 @@ const Users = () => {
           <Dialog open={!!steps} onClose={onCloseDialog} title="Add User">
             <>
               {steps === 2 && userId ? (
-                <AvatarEditImag
+                <EditImagSteps2
+                  fetching={uploadProfile.isLoading}
                   onUpload={(formData) => {
                     formData.append('userId', userId);
                     uploadProfile.mutate(formData);
