@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Redirect, Switch, withRouter, Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { Avatar, Button } from '@mui/material';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
+import { useTheme } from '@mui/material/styles';
 import { logout } from 'actions/auth';
 import { gitUser } from 'actions/auth';
 import Users from 'components/Page/Auth/Users';
 import Loading from 'components/Page/Public/Loading';
+import { ThemeContext } from './rootRouter';
 import styles from './style.module.css';
 
 const AuthRouter = () => {
+  const theme = useTheme();
+  const { toggleColorMode } = useContext(ThemeContext);
   const history = useHistory();
   const queryClient = useQueryClient();
 
@@ -35,6 +39,13 @@ const AuthRouter = () => {
           <div className={styles.authRouterHeader}>
             <p>{userData?.email}</p>
             <div style={{ display: 'flex', gap: 6 }}>
+              <Button
+                size="small"
+                variant="text"
+                onClick={() => toggleColorMode(theme.palette.mode)}
+              >
+                {theme.palette.mode}
+              </Button>
               <Button
                 size="small"
                 variant="text"
