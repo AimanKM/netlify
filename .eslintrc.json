@@ -17,7 +17,7 @@
     "plugins": [
         "react"
     ],
-    "parser": "babel-eslint",
+    "parser": "react-scripts/node_modules/babel-eslint",
 
     "rules": {
         "import/prefer-default-export": 0,
