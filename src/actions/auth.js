@@ -11,3 +11,7 @@ export const logout = () => {
 export const gitUser = () => {
   return ApiUtils({ url: 'auth/git_user' });
 };
+
+export const updateUser = (data) => {
+  return ApiUtils({ url: 'auth/update_user', method: 'POST', data });
+};
