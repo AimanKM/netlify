@@ -12,11 +12,12 @@ const RootRouter = () => {
 
   const colorMode = React.useMemo(
     () => ({
+      setColorMode: (prevMode) => setMode(prevMode),
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
       },
     }),
-    [],
+    []
   );
 
   const theme = React.useMemo(
@@ -32,9 +33,7 @@ const RootRouter = () => {
   return (
     <>
       <ThemeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          {isLogin && <AuthRouter />}
-          </ThemeProvider>
+        <ThemeProvider theme={theme}>{isLogin && <AuthRouter />}</ThemeProvider>
       </ThemeContext.Provider>
 
       {!isLogin && <PublicRouter />}

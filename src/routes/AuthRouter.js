@@ -1,24 +1,27 @@
 import React, { useContext } from 'react';
 import { Route, Redirect, Switch, withRouter, Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { Avatar, Button } from '@mui/material';
+import { Avatar, Button, IconButton } from '@mui/material';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { useTheme } from '@mui/material/styles';
-import { logout } from 'actions/auth';
+import { logout, updateUser } from 'actions/auth';
 import { gitUser } from 'actions/auth';
 import Users from 'components/Page/Auth/Users';
 import Loading from 'components/Page/Public/Loading';
 import { ThemeContext } from './rootRouter';
+import { ReactComponent as LightMode } from 'components/atoms/icon/light-mode.svg';
+import { ReactComponent as DarkMode } from 'components/atoms/icon/dark-mode.svg';
 import styles from './style.module.css';
 
 const AuthRouter = () => {
   const theme = useTheme();
-  const { toggleColorMode } = useContext(ThemeContext);
+  const { toggleColorMode, setColorMode } = useContext(ThemeContext);
   const history = useHistory();
   const queryClient = useQueryClient();
 
   const { status, data } = useQuery('user', gitUser, {
+    onSuccess: ({ data: { user } }) => setColorMode(user.mode || 'light'),
     onError: () => toast.error('Internal Server Error'),
   });
   const userData = data?.data.user;
@@ -39,13 +42,15 @@ const AuthRouter = () => {
           <div className={styles.authRouterHeader}>
             <p>{userData?.email}</p>
             <div style={{ display: 'flex', gap: 6 }}>
-              <Button
+              <IconButton
                 size="small"
-                variant="text"
-                onClick={() => toggleColorMode(theme.palette.mode)}
+                onClick={() => {
+                  toggleColorMode();
+                  updateUser({ mode: theme.palette.mode === 'light' ? 'dark' : 'light' });
+                }}
               >
-                {theme.palette.mode}
-              </Button>
+                {theme.palette.mode === 'dark' ? <LightMode /> : <DarkMode />}
+              </IconButton>
               <Button
                 size="small"
                 variant="text"
