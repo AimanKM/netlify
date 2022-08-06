@@ -1,23 +1,42 @@
-.container {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  justify-content: center;
-  }
+.formLogen {
+  color: white;
+  background: rgb(201, 199, 245);
+  background: linear-gradient(
+    65deg,
+    rgba(201, 199, 245, 1) 0%,
+    rgba(9, 9, 121, 1) 30%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  margin: auto;
+  box-shadow: 0px 2px 10px rgb(0 0 0 / 20%), 0px 10px 20px rgb(0 0 0 / 30%),
+    0px 30px 60px 1px rgb(0 0 0 / 50%);
+  border-radius: 8px;
+  padding: 50px;
+  width: 370px;
+}
 
-.form {
-  display: flex;
+.textInput [class*="MuiInput-root"],
+.textInput [class*="MuiInput-input"],
+.textInput [class*="MuiInputLabel-root"],
+.textInput [class*="MuiInput-fullWidth"]{
+  color: #fff !important;
+}
+
+.textInput [class*="MuiInputBase-root"]::after {
+  border-bottom: 2px solid #fff;
+}
+
+.formLogenHeader {
   flex-direction: column;
-  align-items: center;
-  background-color: #efefef;
-  border-radius: 6px;
-  padding: 12px;
-  height: 340px;
-  width: 245px;
-  }
+  text-align: center;
+  padding: 42px 0 12px;
+}
+
+.formLogenFooter {
+  justify-content: space-between;
+}
 
 .forgotPassword {
   padding: 16px;
   min-width: 470px;
-  }
-  
+}

@@ -13,6 +13,18 @@ body,
 a {
   text-decoration: none;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  /* -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-text-fill-color: yellow !important; */
+  /* -webkit-box-shadow: 0 0 0 1000px #3F3F7A inset !important;
+  -webkit-text-fill-color: white !important;
+  padding: 4px 10px; */
+}
+
 /* *::-webkit-scrollbar {
   width: 8px;
 }
@@ -27,5 +39,3 @@ a {
   background: #8b8888; 
   border-radius: 8px;
 } */
-
-

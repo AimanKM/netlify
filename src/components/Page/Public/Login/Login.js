@@ -6,7 +6,7 @@ import { login } from 'actions/auth';
 import { toast } from 'react-toastify';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Form } from 'react-final-form';
-import { Spacer, TextInput } from 'components/atoms';
+import { Flex, Spacer, TextInput } from 'components/atoms';
 import { required } from 'components/validations/FormValidations';
 import styles from './style.module.css';
 
@@ -28,47 +28,57 @@ const Login = () => {
         initialValues={{}}
         onSubmit={(values) => onSubmit.mutate(values)}
         render={({ handleSubmit }) => (
-          <div className={styles.container}>
-            <form onSubmit={handleSubmit} className={styles.form}>
-              <Typography variant="h5" gutterBottom>
+          <form  onSubmit={handleSubmit} className={styles.formLogen}>
+            <Flex gap={7} className={styles.formLogenHeader}>
+              <Typography variant="h4" gutterBottom>
                 Login
               </Typography>
-              <Spacer height={16} />
+              <Typography variant="p" gutterBottom>
+                Welcome back
+              </Typography>
+            </Flex>
 
-              <TextInput
-                label="E-mail"
-                name="email"
-                type="email"
-                validate={[required]}
-              />
-              <Spacer height={16} />
-              <TextInput
-                label="Password"
-                name="password"
-                type="password"
-                validate={[required]}
-              />
-              <Spacer height={12} />
-              <div style={{ width: '100%' }}>
-                <Button
-                  size="small"
-                  onClick={() => setOpen(true)}
-                  variant="text"
-                >
-                  Forgot your password
-                </Button>
-              </div>
-
-              <Spacer height={64} />
+            <TextInput
+              fullWidth
+              label="E-mail"
+              name="email"
+              type="email"
+              variant="standard"
+              validate={[required]}
+              className={styles.textInput}
+            />
+            <Spacer height={6} />
+            <TextInput
+              fullWidth
+              autoComplete="tel-national username"
+              label="Password"
+              name="password"
+              type="password"
+              variant="standard"
+              validate={[required]}
+              className={styles.textInput}
+            />
+            <Spacer height={12} />
+            <Flex className={styles.formLogenFooter}>
               <LoadingButton
                 type="submit"
+                color="inherit"
+                variant="outlined"
                 loading={onSubmit.isLoading}
-                variant="contained"
               >
                 Login
               </LoadingButton>
-            </form>
-          </div>
+
+              <Button
+                color="inherit"
+                size="small"
+                variant="text"
+                onClick={() => setOpen(true)}
+              >
+                Forgot your password
+              </Button>
+            </Flex>
+          </form>
         )}
       />
       {/* Forgot your password */}
