@@ -19,6 +19,8 @@ const TextInput = ({
     validate={composeValidators(...validate)}
     render={({ input, meta }) => (
       <TextField
+        // color="inherit"
+        // color="primary"
         label={label}
         id={name}
         {...input}
