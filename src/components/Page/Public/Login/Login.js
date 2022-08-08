@@ -50,7 +50,6 @@ const Login = () => {
             <Spacer height={6} />
             <TextInput
               fullWidth
-              autoComplete="tel-national username"
               label="Password"
               name="password"
               type="password"
