@@ -14,7 +14,8 @@ a {
   text-decoration: none;
 }
 
+
 input:-webkit-autofill {
-  transition: background-color 50000000000000000000s , color 50000000000000000000s ease-in-out 0s,;
-  transition-delay: background-color 50000000000000000000s, color 50000000000000000000s;
+  transition-delay: 50000000000000000000s;
+  transition-property: background-color, color;
 }
