@@ -10,23 +10,29 @@ import styles from './style.module.css';
 const SideNavigation = ({ disabledLogout, funcLogout }) => (
   <Flex gap={64} className={styles.Body}>
     <h3>icon</h3>
-    <Flex style={{ flexDirection: 'column' }}>
-      <Button startIcon={<IconHouse />} color="inherit" variant="text">
-        <Link to="/">hoem</Link>
-      </Button>
-      <Button variant="text" color="inherit" startIcon={<IconHouse />}>
-        <Link to="/aaa">aaa</Link>
+    <Flex className={styles.links}>
+      <Flex style={{ flexDirection: 'column' }}>
+      <Link to="/">
+        <Button startIcon={<IconHouse />} color="inherit" variant="text">
+          hoem
+        </Button>
+      </Link>
+      <Link to="/aaa">
+        <Button startIcon={<IconHouse />} color="inherit" variant="text">
+          test
+        </Button>
+      </Link>
+      </Flex>
+      <Button
+        variant="text"
+        color="inherit"
+        onClick={funcLogout}
+        disabled={disabledLogout}
+        startIcon={<IconLogout />}
+      >
+        Log out
       </Button>
     </Flex>
-    <Button
-      variant="text"
-      color="inherit"
-      onClick={funcLogout}
-      disabled={disabledLogout}
-      startIcon={<IconLogout />}
-    >
-      Log out
-    </Button>
   </Flex>
 );
 
