@@ -1,19 +1,5 @@
-.Body {
-  background: linear-gradient(
-    65deg,
-    rgba(201, 199, 245, 1) 0%,
-    rgba(9, 9, 121, 1) 30%,
-    rgba(0, 212, 255, 1) 100%
-  );
-  color: white;
-  height: 100%;
+.authRouterHeader {
+  padding: 6px 12px;
   align-items: center;
-  flex-direction: column;
-  border-top-right-radius: 26px;
-  min-width: 164px;
-  padding-top: 64px;
-}
-
-.Body a {
-  color: white;
+  justify-content: flex-end;
 }
