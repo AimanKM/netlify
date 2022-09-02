@@ -4,5 +4,6 @@ import Spacer from './Spacer';
 import Card from './Card';
 import Dialog from './Dialog';
 import AvatarEditImag from './AvatarEditImag';
+import Menu from './Menu';
 
-export { Flex, TextInput, Spacer, Card, Dialog, AvatarEditImag };
+export { Flex, TextInput, Spacer, Card, Dialog, AvatarEditImag, Menu };

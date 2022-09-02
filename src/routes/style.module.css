@@ -1,39 +1,17 @@
+/* public */
 .publicRouter {
   display: flex;
   align-items: center;
-  background: #ABCDEF;
+  background: #abcdef;
   height: 100%;
   justify-content: center;
-  }
+}
 
-.authRouter {
-  display: flex;
-  gap: 4px;
+/* auth */
+.authRouterContent {
   flex-direction: column;
-  height: 100%;
-}
-
-.authRouterHeader {
-  display: flex;
-  padding: 6px 12px;
-  align-items: center;
-  background-color: #efefef;
-  justify-content: space-between;
-  border-radius: 6px;
-}
-
-.authRouterBody {
-  display: flex;
-  gap: 6px;
-  height: 100%;
-  padding: 0 6px;
-}
-
-.authRouterBodyLinks {
-  background-color: #efefef;
-  height: 100%;
-  border-radius: 6px;
-  width: 120px;
+  padding: 6px 0;
+  width: 100%;
 }
 
 .authRouterContainerLinks {
@@ -43,13 +21,7 @@
   padding: 12px;
 }
 
-.authRouterLink {
-  color: black;
-}
-
 .authRouterBodyContainer {
-  border-radius: 6px;
-  background-color: #efefef;
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
