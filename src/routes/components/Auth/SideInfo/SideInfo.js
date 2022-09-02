@@ -33,8 +33,8 @@ const SideInfo = ({ userData }) => {
         >
           {theme.palette.mode === 'dark' ? <LightMode /> : <DarkMode />}
         </IconButton>
-        <IconButton onClick={handleClick} size="small">
-          <Avatar src={userData?.photoURL} sx={{ width: 32, height: 32 }}>
+        <IconButton onClick={handleClick} >
+          <Avatar src={userData?.photoURL} sx={{ width: 40, height: 40 }}>
             {userData?.display_name[0].toUpperCase()}
           </Avatar>
         </IconButton>

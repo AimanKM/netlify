@@ -12,8 +12,8 @@ const Menu = ({ openAnchorEl, onClose, children }) => (
       sx: {
         overflow: 'visible',
         filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-        mt: 1,
-        ml: '3px',
+        // mt: 1,
+        ml: '-3px',
         '&:before': {
           content: '""',
           display: 'block',

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
@@ -44,15 +44,13 @@ const AuthRouter = () => {
           <Spacer width={16} />
           <Flex className={styles.authRouterContent}>
             <SideInfo userData={userData} />
-            <div className={styles.authRouterBody}>
               <div className={styles.authRouterBodyContainer}>
                 <Switch>
                   <Route exact path="/" component={Users} />
-                  <Route exact path="/aaa" component={() => <h1>AAA</h1>} />
+                  <Route exact path="/aaa" component={() => <h1>Test</h1>} />
                   <Redirect to="/" />
                 </Switch>
               </div>
-            </div>
           </Flex>
         </Flex>
       )}
@@ -60,4 +58,4 @@ const AuthRouter = () => {
   );
 };
 
-export default withRouter(AuthRouter);
+export default AuthRouter;
