@@ -14,7 +14,23 @@
   height: 220px;
 }
 
-.uploadIcon { 
+.uploadIcon {
   height: 60px;
   width: 60px;
+}
+
+.search {
+  position: absolute;
+  top: 25px;
+  padding: 0 6px;
+}
+
+.searchInput {
+  border: solid 2px #c1c1c1;
+  border-radius: 5px;
+  padding: 2px 8px;
+}
+
+.pagination {
+  justify-content: center
 }
