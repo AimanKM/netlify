@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { updateUser } from 'actions/auth';
 import { Avatar, IconButton, Typography } from '@mui/material';
-import { Flex, Menu } from 'components/atoms';
+import { Flex, Lazyload, Menu } from 'components/atoms';
 import { useTheme } from '@emotion/react';
 import { ThemeContext } from 'routes/rootRouter';
 import { ReactComponent as LightMode } from 'components/atoms/icon/light-mode.svg';
@@ -11,6 +11,7 @@ import styles from './style.module.css';
 
 const SideInfo = ({ userData }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [url, setUrl] = useState(userData?.photoURL);
   const theme = useTheme();
   const { toggleColorMode } = useContext(ThemeContext);
   const handleClose = () => {
@@ -18,6 +19,7 @@ const SideInfo = ({ userData }) => {
   };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    setUrl('https://storage.googleapis.com/netlify-b4b13.appspot.com/uesr_photoURL%2F3236628f-21f1-4853-b5e5-57f2e986c39f-child.jpg');
   };
   return (
     <Flex className={styles.authRouterHeader}>
@@ -33,8 +35,13 @@ const SideInfo = ({ userData }) => {
         >
           {theme.palette.mode === 'dark' ? <LightMode /> : <DarkMode />}
         </IconButton>
-        <IconButton onClick={handleClick} >
-          <Avatar src={userData?.photoURL} sx={{ width: 40, height: 40 }}>
+        <Lazyload url={url} />
+        <IconButton onClick={handleClick}>
+          <Avatar
+            // loading="lazy"
+            src={userData?.photoURL}
+            sx={{ width: 40, height: 40 }}
+          >
             {userData?.display_name[0].toUpperCase()}
           </Avatar>
         </IconButton>
